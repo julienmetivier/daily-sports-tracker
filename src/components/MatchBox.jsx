@@ -21,8 +21,7 @@ const MatchBox = ({
     teamAway, 
     teamHome
   }) => {
-  const localGameTime = new Date(gameDatetime).toLocaleDateString('en-us', { 
-    weekday: 'long', 
+  const localGameTime = new Date(gameDatetime).toLocaleTimeString('en-us', {
     hour: 'numeric', 
     minute: 'numeric'
   });
