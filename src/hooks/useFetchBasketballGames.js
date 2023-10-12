@@ -21,12 +21,12 @@ function useFetchBasketballGames(url) {
               [gameDetails.competitors[0].homeAway]: gameDetails.competitors[0],
               [gameDetails.competitors[1].homeAway]: gameDetails.competitors[1],
             }
-
+            const statusCode = game.status.type.name;
             // TODO: fortify score to get only overall
 
             const tempGame = {
-              status: game.status.type.description,
-              statusCode: game.status.type.name,
+              status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
+              statusCode,
               gameDatetime: game.date,
               teamAway: {
                 name: teams.away.team.displayName,
