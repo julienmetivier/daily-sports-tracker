@@ -30,13 +30,13 @@ function useFetchHockeyGames(url) {
               gameDatetime: game.date,
               teamAway: {
                 name: teams.away.team.displayName,
-                record: teams.away.records[0].summary,
+                record: teams.away.records ? teams.away.records[0].summary : 'N/A',
                 logo: teams.away.team.logo,
                 score: teams.away.score >= 0 ? teams.away.score : null,
               },
               teamHome: {
                 name: teams.home.team.displayName,
-                record: teams.home.records[0].summary,
+                record: teams.home.records ? teams.home.records[0].summary : 'N/A',
                 logo: teams.home.team.logo,
                 score: teams.home.score >= 0 ? teams.home.score : null,
               }

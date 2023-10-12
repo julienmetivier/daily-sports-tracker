@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 
-import { MLBPanel, NBAPanel, NHLPanel } from 'containers';
+import { MLBPanel, NBAPanel, NFLPanel, NHLPanel } from 'containers';
 
 import './App.css';
 
@@ -23,6 +23,7 @@ function App() {
         <MLBPanel />
         <NHLPanel />
         <NBAPanel />
+        <NFLPanel />
       </body>
     </div>
   );

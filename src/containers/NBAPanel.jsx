@@ -6,7 +6,7 @@ import { NBA } from 'consts';
 import useFetchBasketballGames from 'hooks/useFetchBasketballGames';
 
 const MLBPanel = () => {
-  const { data, loading } = useFetchBasketballGames('http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard');
+  const { data, loading } = useFetchBasketballGames('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard');
 
   if (loading) {
     return <Typography variant='h3'>Please wait while we fetch the info</Typography>;
