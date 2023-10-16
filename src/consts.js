@@ -6,5 +6,6 @@ export const NBA = 'NBA';
 export const NCAAF = 'NCAAF';
 
 // Game states
+export const HALFTIME = 'STATUS_HALFTIME';
 export const IN_PROGRESS = 'STATUS_IN_PROGRESS';
 export const FINAL = 'STATUS_FINAL';

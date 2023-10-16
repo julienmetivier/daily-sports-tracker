@@ -20,6 +20,7 @@ function App() {
         </Box>
       </header>
       <body>
+        {/* Refresh every 5 minutes */}
         <MLBPanel />
         <NHLPanel />
         <NBAPanel />
@@ -31,3 +32,8 @@ function App() {
 }
 
 export default App;
+
+// Create shareable props or interface
+// Write tests, specially for MatchBox
+// Add generic filtering for games order
+// Movable sections

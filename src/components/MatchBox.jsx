@@ -1,6 +1,10 @@
 import { Box, Grid, Typography, capitalize } from '@mui/material';
 
-import { IN_PROGRESS, FINAL } from 'consts';
+import { IN_PROGRESS, FINAL, HALFTIME } from 'consts';
+
+const loserColor = '#424347';
+const winnerColor = 'black';
+const gameFinished = loserColor;
 
 const TeamLogo = ({ logoUrl, teamName }) => (
   <Box
@@ -26,6 +30,28 @@ const MatchBox = ({
     minute: 'numeric'
   });
 
+  function TeamLine({team}) {
+    const fontColor = team.winner !== null && team.winner === false ? loserColor : winnerColor;
+    return (
+      <>
+        <Grid item xs={6} md={6} sx={{textAlign: "right"}}>
+          <Typography color={fontColor}>{team.name}</Typography>
+        </Grid>
+        <Grid item xs={2} md={2}>
+          <Typography color={fontColor}>{team.record}</Typography>
+        </Grid>
+        <Grid item xs={1} md={1}>
+          <TeamLogo logoUrl={team.logo} teamName={team.name} />
+        </Grid>
+        { [IN_PROGRESS, HALFTIME, FINAL].includes(statusCode) &&
+          <Grid item xs={3} md={3}>
+            <Typography variant='h5' color={fontColor}>{team.score}</Typography>
+          </Grid>
+        }
+      </>
+    );
+  }
+
   return ( 
     <Box sx={{ 
       mx: '1rem',
@@ -41,10 +67,10 @@ const MatchBox = ({
         <Grid item xs={12} md={12}>
           <Grid container justify="flex-end" alignItems="center">
               <Grid item xs={7} md={7}>
-                <Typography variant='h6'>{capitalize(status)}</Typography>
+                <Typography variant='h6' color={statusCode === FINAL && gameFinished}>{capitalize(status)}</Typography>
               </Grid>
               <Grid item xs={5} md={5}>
-                <Typography sx={{color: 'white'}}>{`(${localGameTime})`}</Typography>
+                <Typography color={statusCode === FINAL ? gameFinished : 'white'}>{`(${localGameTime})`}</Typography>
               </Grid>
           </Grid>
         </Grid>
@@ -54,34 +80,8 @@ const MatchBox = ({
             direction="row"
             alignItems="center"
           >
-            <Grid item xs={6} md={6} sx={{textAlign: "right"}}>
-              <Typography>{teamAway.name}</Typography>
-            </Grid>
-            <Grid item xs={2} md={2}>
-              <Typography>{teamAway.record}</Typography>
-            </Grid>
-            <Grid item xs={1} md={1}>
-              <TeamLogo logoUrl={teamAway.logo} teamName={teamAway.name} />
-            </Grid>
-            { [IN_PROGRESS, FINAL].includes(statusCode) && 
-              <Grid item xs={3} md={3}>
-                <Typography variant='h5'>{teamAway.score}</Typography>
-              </Grid>
-            }
-            <Grid item xs={6} md={6} sx={{textAlign: "right"}}>
-              <Typography>{teamHome.name}</Typography>
-            </Grid>
-            <Grid item xs={2} md={2}>
-              <Typography>{teamHome.record}</Typography>
-            </Grid>
-            <Grid item xs={1} md={1}>
-              <TeamLogo logoUrl={teamHome.logo} teamName={teamHome.name} />
-            </Grid>
-            { [IN_PROGRESS, FINAL].includes(statusCode) && 
-              <Grid item xs={3} md={3}>
-                <Typography variant='h5'>{teamHome.score}</Typography>
-              </Grid>
-            }
+            <TeamLine team={teamAway} />
+            <TeamLine team={teamHome} />
           </Grid>
         </Grid>
       </Grid>
