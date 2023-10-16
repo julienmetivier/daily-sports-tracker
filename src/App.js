@@ -38,3 +38,4 @@ export default App;
 // Add generic filtering for games order
 // Movable sections
 // Rewrite README
+// Make hooks team creation generic

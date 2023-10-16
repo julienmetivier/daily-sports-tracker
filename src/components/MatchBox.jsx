@@ -6,12 +6,13 @@ const loserColor = '#424347';
 const winnerColor = 'black';
 const gameFinished = loserColor;
 
-const TeamLogo = ({ logoUrl, teamName }) => (
+const TeamLogo = ({ logoUrl, teamName, opacity }) => (
   <Box
     component="img"
     sx={{
       height: 24,
       width: 24,
+      opacity
     }}
     alt={teamName}
     src={logoUrl}
@@ -30,8 +31,10 @@ const MatchBox = ({
     minute: 'numeric'
   });
 
-  function TeamLine({team}) {
-    const fontColor = team.winner !== null && team.winner === false ? loserColor : winnerColor;
+  const TeamLine = ({team}) => {
+    const loserAndFinished = team.winner !== null && team.winner === false ? true : false;
+    const fontColor = loserAndFinished ? loserColor : winnerColor;
+    const logoOpacity = loserAndFinished ? 0.6 : 1;
     return (
       <>
         <Grid item xs={6} md={6} sx={{textAlign: "right"}}>
@@ -41,7 +44,7 @@ const MatchBox = ({
           <Typography color={fontColor}>{team.record}</Typography>
         </Grid>
         <Grid item xs={1} md={1}>
-          <TeamLogo logoUrl={team.logo} teamName={team.name} />
+          <TeamLogo logoUrl={team.logo} teamName={team.name} opacity={logoOpacity}/>
         </Grid>
         { [IN_PROGRESS, HALFTIME, FINAL].includes(statusCode) &&
           <Grid item xs={3} md={3}>
