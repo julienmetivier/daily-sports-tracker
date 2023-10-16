@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { IN_PROGRESS } from 'consts';
+import { checkIfWinnerExistsAndValue } from 'utils';
 
 function useFetchBasketballGames(url) {
   const [ data, setData ] = useState([]);
@@ -33,12 +34,14 @@ function useFetchBasketballGames(url) {
                 record: teams.away.records ? teams.away.records[0].summary : 'N/A',
                 logo: teams.away.team.logo,
                 score: teams.away.score >= 0 ? teams.away.score : null,
+                winner: checkIfWinnerExistsAndValue(teams.away),
               },
               teamHome: {
                 name: teams.home.team.displayName,
                 record: teams.home.records ? teams.home.records[0].summary : 'N/A',
                 logo: teams.home.team.logo,
                 score: teams.home.score >= 0 ? teams.home.score : null,
+                winner: checkIfWinnerExistsAndValue(teams.home),
               }
             }
             simplifiedFormat.push(tempGame);

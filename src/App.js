@@ -37,3 +37,4 @@ export default App;
 // Write tests, specially for MatchBox
 // Add generic filtering for games order
 // Movable sections
+// Rewrite README
