@@ -39,3 +39,4 @@ export default App;
 // Movable sections
 // Rewrite README
 // Make hooks team creation generic
+// Make all files TSX

@@ -1,4 +1,5 @@
 import { Box, Grid, Typography, capitalize } from '@mui/material';
+import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 
 import { IN_PROGRESS, FINAL, HALFTIME } from 'consts';
 
@@ -44,7 +45,11 @@ const MatchBox = ({
           <Typography color={fontColor}>{team.record}</Typography>
         </Grid>
         <Grid item xs={1} md={1}>
-          <TeamLogo logoUrl={team.logo} teamName={team.name} opacity={logoOpacity}/>
+          {team.logo !== null ?
+            <TeamLogo logoUrl={team.logo} teamName={team.name} opacity={logoOpacity}/>
+            :
+            <ImageNotSupportedIcon sx={{color: loserColor}} />
+          }
         </Grid>
         { [IN_PROGRESS, HALFTIME, FINAL].includes(statusCode) &&
           <Grid item xs={3} md={3}>
