@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Daily Sports Tracker App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+This is a Sports Tracker app that allows users to access and track sports information using ESPN's API and the Bun Toolkit. With this app, users can see all games for the present day from a variety of sports.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### 1. Live Scores
+Get semi-real-time updates on scores. (Time to refresh feature TBD)
 
-### `npm start`
+### 2. Team records
+Access every team records to see the best matchup available.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 3. Simple and efficient interface
+Glance view for any games scheduled, ongoing and final.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
+[ESPN API](http://a.espncdn.com/prod/assets/apis/pdfs/espn_api_branding_guide_10-12-11.pdf): The app leverages ESPN's API to fetch real-time sports data and information.
 
-### `npm test`
+[Bun Toolkit](https://bun.sh/): Bun is a powerful toolkit that facilitates building web applications efficiently, making development and maintenance easier.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[React](https://react.dev/): React is a popular JavaScript library for building user interfaces. In this app, React is used for creating the dynamic and interactive frontend..
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The Bun Toolkit is a powerful set of tools and libraries for building web applications efficiently. This guide will walk you through the process of setting up a new project using Bun Toolkit.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Before you begin, ensure that you have the following prerequisites installed on your system:
 
-### `npm run eject`
+- [Node.js](https://nodejs.org/): Node.js is a JavaScript runtime required for running JavaScript applications on the server side.
+- [npm](https://www.npmjs.com/): You'll need a package manager to install project dependencies.
+- [bun](https://bun.sh/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To use this app, follow these installation steps:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+git clone https://github.com/julienmetivier/daily-sports-tracker.git
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Navigate to project
 
-## Learn More
+```bash
+cd sports-tracker-app
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Install dependecies
+```bash
+bun install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. Start the app
+```bash
+bun start
+```
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+N.B. You can use npm for installation and start process, I just had fun trying out bun and a few of its features.
