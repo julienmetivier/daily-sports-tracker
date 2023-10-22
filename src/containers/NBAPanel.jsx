@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 
-import { MatchBox, PanelWrapper } from 'components';
+import { MatchBox, PanelWrapper, NoGamesLabel } from 'components';
 import { NBA } from 'consts';
 
 import useFetchBasketballGames from 'hooks/useFetchBasketballGames';
@@ -13,7 +13,7 @@ const MLBPanel = () => {
   }
 
   if (data.length === 0) {
-    return <Typography variant='h3'>No {NBA} games today</Typography>;
+    return <NoGamesLabel leagueName={NBA} />;
   }
 
   return (

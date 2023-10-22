@@ -52,8 +52,4 @@ export default App;
 // Write tests, specially for MatchBox
 // Add generic filtering for games order
 // Movable sections
-// DONE - Rewrite README
-// DONE - Make hooks team creation generic
 // Make all files TSX
-// DONE - Add ESPN logo in title
-// Add rank to NCAAF
