@@ -1,7 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 
-import { MatchBox, PanelWrapper } from 'components';
-import { NHL } from 'consts';
+import { MatchBox, NoGamesLabel } from 'components';
 
 import useFetchHockeyGames from 'hooks/useFetchHockeyGames';
 
@@ -13,19 +12,17 @@ const NHLPanel = () => {
   }
 
   if (data.length === 0) {
-    return <Typography variant='h3'>No {NHL} games today</Typography>;
+    return <NoGamesLabel />;
   }
 
   return (
-    <PanelWrapper leagueName={NHL}>
-      <Grid container spacing={2}>
-        {data?.map((game, i) =>
-          <Grid item xs={12} sm={6} md={6} lg={4}>
-            <MatchBox {...game}/>
-          </Grid>
-        )}
-      </Grid>
-    </PanelWrapper>
+    <Grid container spacing={2}>
+      {data?.map((game, i) =>
+        <Grid item xs={12} sm={6} md={6} lg={4}>
+          <MatchBox {...game}/>
+        </Grid>
+      )}
+    </Grid>
   );
 }
  

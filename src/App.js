@@ -1,6 +1,8 @@
 import { Box, Typography } from '@mui/material';
 
 import { MLBPanel, NBAPanel, NCAAFPanel, NFLPanel, NHLPanel } from 'containers';
+import { PanelWrapper } from 'components';
+import { MLB, NBA, NCAAF, NFL, NHL} from 'consts';
 
 import './App.css';
 import ESPNLogo from './assets/ESPN_wordmark.svg';
@@ -11,6 +13,29 @@ function App() {
     day: 'numeric',
     month: 'long'
   });
+
+  const panelsToRender = [
+    {
+      league: MLB,
+      panel: <MLBPanel />,
+    },
+    {
+      league: NBA,
+      panel: <NBAPanel />,
+    },
+    {
+      league: NCAAF,
+      panel: <NCAAFPanel />,
+    },
+    {
+      league: NFL,
+      panel: <NFLPanel />,
+    },
+    {
+      league: NHL,
+      panel: <NHLPanel />,
+    }
+  ];
 
   return (
     <div className="App">
@@ -36,11 +61,14 @@ function App() {
       </header>
       <body>
         {/* Refresh every 5 minutes */}
-        <MLBPanel />
-        <NHLPanel />
-        <NBAPanel />
-        <NFLPanel />
-        <NCAAFPanel />
+        { panelsToRender.map(item => {
+            return (
+              <PanelWrapper leagueName={item.league} key={item.league}>
+                {item.panel}
+              </PanelWrapper>
+            )}
+          )
+        }
       </body>
     </div>
   );

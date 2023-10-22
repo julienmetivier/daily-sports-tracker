@@ -1,7 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 
-import { MatchBox, PanelWrapper, NoGamesLabel } from 'components';
-import { NFL } from 'consts';
+import { MatchBox, NoGamesLabel } from 'components';
 
 import useFetchFootballGames from 'hooks/useFetchFootballGames';
 
@@ -13,19 +12,17 @@ const NFLPanel = () => {
   }
 
   if (data.length === 0) {
-    return <NoGamesLabel leagueName={NFL} />;
+    return <NoGamesLabel />;
   }
 
   return (
-    <PanelWrapper leagueName={NFL}>
-      <Grid container spacing={2}>
-        {data?.map((game, i) =>
-          <Grid item xs={12} sm={6} md={6} lg={4}>
-            <MatchBox {...game}/>
-          </Grid>
-        )}
-      </Grid>
-    </PanelWrapper>
+    <Grid container spacing={2}>
+      {data?.map((game, i) =>
+        <Grid item xs={12} sm={6} md={6} lg={4}>
+          <MatchBox {...game}/>
+        </Grid>
+      )}
+    </Grid>
   );
 }
  
