@@ -1,6 +1,6 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 
-import { MatchBox, NoGamesLabel } from 'components';
+import { LoadingPanel, MatchBox, NoGamesLabel } from 'components';
 
 import useFetchBasketballGames from 'hooks/useFetchBasketballGames';
 
@@ -8,7 +8,7 @@ const MLBPanel = () => {
   const { data, loading } = useFetchBasketballGames('https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard');
 
   if (loading) {
-    return <Typography variant='h3'>Please wait while we fetch the info</Typography>;
+    return <LoadingPanel />;
   }
 
   if (data.length === 0) {
