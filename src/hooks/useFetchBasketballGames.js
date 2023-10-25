@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { IN_PROGRESS } from 'consts';
-import { teamBuilder } from 'utils';
+import { isCurrentGameToday, teamBuilder } from 'utils';
 
 function useFetchBasketballGames(url) {
   const [ data, setData ] = useState([]);
@@ -17,10 +17,7 @@ function useFetchBasketballGames(url) {
         const simplifiedFormat = [];
         if ( parsedResponse.events.length > 0 ) {
           parsedResponse.events.forEach(game => {
-            const formattedGameDate = new Date(game.date);
-            const formattedTodayDate = new Date();
-            if (formattedGameDate.setHours(0,0,0,0) === formattedTodayDate.setHours(0,0,0,0))
-            {
+            if (isCurrentGameToday(game.date)) {
               const gameDetails = game.competitions[0];
               const teams = {
                 [gameDetails.competitors[0].homeAway]: gameDetails.competitors[0],

@@ -18,3 +18,9 @@ export function teamBuilder(team) {
     winner: checkIfWinnerExistsAndValue(team),
   };
 }
+
+export function isCurrentGameToday(gameDate) {
+  const formattedGameDate = new Date(gameDate);
+  const formattedTodayDate = new Date();
+  return formattedGameDate.setHours(0,0,0,0) === formattedTodayDate.setHours(0,0,0,0);
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { IN_PROGRESS } from 'consts';
-import { checkIfWinnerExistsAndValue } from 'utils';
+import { checkIfWinnerExistsAndValue, isCurrentGameToday } from 'utils';
 
 function useFetchBaseballGames(url) {
   const [ data, setData ] = useState([]);
@@ -17,37 +17,40 @@ function useFetchBaseballGames(url) {
         const simplifiedFormat = [];
         if ( parsedResponse.events.length > 0 ) {
           parsedResponse.events.forEach(game => {
-            const gameDetails = game.competitions[0];
-            const teams = {
-              [gameDetails.competitors[0].homeAway]: gameDetails.competitors[0],
-              [gameDetails.competitors[1].homeAway]: gameDetails.competitors[1],
-            }
-            const score = {
-              [gameDetails.series.competitors[0].id]: gameDetails.series.competitors[0],
-              [gameDetails.series.competitors[1].id]: gameDetails.series.competitors[1],
-            };
-            const statusCode = game.status.type.name;
-
-            const tempGame = {
-              status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
-              statusCode,
-              gameDatetime: game.date,
-              teamAway: {
-                name: teams.away.team.displayName,
-                record: `${score[teams.away.id].wins}-${score[teams.home.id].wins}`,
-                logo: teams.away.team.logo,
-                score: teams.away.score >= 0 ? teams.away.score : null,
-                winner: checkIfWinnerExistsAndValue(teams.away),
-              },
-              teamHome: {
-                name: teams.home.team.displayName,
-                record: `${score[teams.home.id].wins}-${score[teams.away.id].wins}`,
-                logo: teams.home.team.logo,
-                score: teams.home.score >= 0 ? teams.home.score : null,
-                winner: checkIfWinnerExistsAndValue(teams.home),
+            if (isCurrentGameToday(game.date))
+            {
+              const gameDetails = game.competitions[0];
+              const teams = {
+                [gameDetails.competitors[0].homeAway]: gameDetails.competitors[0],
+                [gameDetails.competitors[1].homeAway]: gameDetails.competitors[1],
               }
+              const score = {
+                [gameDetails.series.competitors[0].id]: gameDetails.series.competitors[0],
+                [gameDetails.series.competitors[1].id]: gameDetails.series.competitors[1],
+              };
+              const statusCode = game.status.type.name;
+
+              const tempGame = {
+                status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
+                statusCode,
+                gameDatetime: game.date,
+                teamAway: {
+                  name: teams.away.team.displayName,
+                  record: `${score[teams.away.id].wins}-${score[teams.home.id].wins}`,
+                  logo: teams.away.team.logo,
+                  score: teams.away.score >= 0 ? teams.away.score : null,
+                  winner: checkIfWinnerExistsAndValue(teams.away),
+                },
+                teamHome: {
+                  name: teams.home.team.displayName,
+                  record: `${score[teams.home.id].wins}-${score[teams.away.id].wins}`,
+                  logo: teams.home.team.logo,
+                  score: teams.home.score >= 0 ? teams.home.score : null,
+                  winner: checkIfWinnerExistsAndValue(teams.home),
+                }
+              }
+              simplifiedFormat.push(tempGame);
             }
-            simplifiedFormat.push(tempGame);
           });
         }
         
