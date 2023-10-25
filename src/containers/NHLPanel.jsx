@@ -1,11 +1,12 @@
 import { Grid } from '@mui/material';
 
 import { LoadingPanel, MatchBox, NoGamesLabel } from 'components';
+import { DATA_URLS } from 'consts';
 
 import useFetchHockeyGames from 'hooks/useFetchHockeyGames';
 
 const NHLPanel = () => {
-  const { data, loading } = useFetchHockeyGames('https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard');
+  const { data, loading } = useFetchHockeyGames(DATA_URLS.NHL);
 
   if (loading) {
     return <LoadingPanel />;

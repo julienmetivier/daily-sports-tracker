@@ -1,11 +1,12 @@
 import { Grid } from '@mui/material';
 
 import { LoadingPanel, MatchBox, NoGamesLabel } from 'components';
+import { DATA_URLS } from 'consts';
 
 import useFetchBaseballGames from 'hooks/useFetchBaseballGames';
 
 const MLBPanel = () => {
-  const { data, loading } = useFetchBaseballGames('https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard');
+  const { data, loading } = useFetchBaseballGames(DATA_URLS.MLB);
 
   if (loading) {
     return <LoadingPanel />;

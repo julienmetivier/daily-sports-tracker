@@ -1,11 +1,12 @@
 import { Grid } from '@mui/material';
 
 import { LoadingPanel, MatchBox, NoGamesLabel } from 'components';
+import { DATA_URLS } from 'consts';
 
 import useFetchFootballGames from 'hooks/useFetchFootballGames';
 
 const NFLPanel = () => {
-  const { data, loading } = useFetchFootballGames('https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard');
+  const { data, loading } = useFetchFootballGames(DATA_URLS.NFL);
 
   if (loading) {
     return <LoadingPanel />;

@@ -1,11 +1,12 @@
 import { Grid } from '@mui/material';
 
 import { LoadingPanel, MatchBox, NoGamesLabel } from 'components';
+import { DATA_URLS } from 'consts';
 
 import useFetchCollegeFootballGames from 'hooks/useFetchCollegeFootballGames';
 
 const NCAAFPanel = () => {
-  const { data, loading } = useFetchCollegeFootballGames('https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard');
+  const { data, loading } = useFetchCollegeFootballGames(DATA_URLS.NCAAF);
 
   if (loading) {
     return <LoadingPanel />;
