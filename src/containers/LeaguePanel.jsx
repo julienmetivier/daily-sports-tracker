@@ -3,10 +3,10 @@ import { Grid } from '@mui/material';
 import { LoadingPanel, MatchBox, NoGamesLabel } from 'components';
 import { DATA_URLS } from 'consts';
 
-import useFetchFootballGames from 'hooks/useFetchFootballGames';
+import useFetchGames from 'hooks/useFetchGames';
 
-const NFLPanel = () => {
-  const { data, loading } = useFetchFootballGames(DATA_URLS.NFL);
+const LeaguePanel = ({ league }) => {
+  const { data, loading } = useFetchGames(league, DATA_URLS[league]);
 
   if (loading) {
     return <LoadingPanel />;
@@ -19,7 +19,14 @@ const NFLPanel = () => {
   return (
     <Grid container spacing={2}>
       {data?.map((game, i) =>
-        <Grid item xs={12} sm={6} md={6} lg={4}>
+        <Grid 
+          item 
+          xs={12} 
+          sm={6} 
+          md={6} 
+          lg={4} 
+          key={`${league}_${i}`}
+        >
           <MatchBox {...game}/>
         </Grid>
       )}
@@ -27,4 +34,4 @@ const NFLPanel = () => {
   );
 }
  
-export default NFLPanel;
+export default LeaguePanel;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { IN_PROGRESS } from 'consts';
-import { isCurrentGameToday, teamBuilder } from 'utils';
+import { IN_PROGRESS, MLB } from 'consts';
+import { checkIfWinnerExistsAndValue, isCurrentGameToday, teamBuilder } from 'utils';
 
 function useFetchGames(league, url) {
   const [ data, setData ] = useState([]);
@@ -18,6 +18,7 @@ function useFetchGames(league, url) {
         if ( parsedResponse.events.length > 0 ) {
           parsedResponse.events.forEach(game => {
             if (isCurrentGameToday(game.date)) {
+              let tempGame = {};
               const gameDetails = game.competitions[0];
               const teams = {
                 [gameDetails.competitors[0].homeAway]: gameDetails.competitors[0],
@@ -25,13 +26,42 @@ function useFetchGames(league, url) {
               }
               const statusCode = game.status.type.name;
 
-              const tempGame = {
-                status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
-                statusCode,
-                gameDatetime: game.date,
-                teamAway: teamBuilder(teams.away),
-                teamHome: teamBuilder(teams.home)
+              switch(league) {
+                case MLB:
+                  const score = {
+                    [gameDetails.series.competitors[0].id]: gameDetails.series.competitors[0],
+                    [gameDetails.series.competitors[1].id]: gameDetails.series.competitors[1],
+                  };
+                  tempGame = {
+                    status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
+                    statusCode,
+                    gameDatetime: game.date,
+                    teamAway: {
+                      name: teams.away.team.displayName,
+                      record: `${score[teams.away.id].wins}-${score[teams.home.id].wins}`,
+                      logo: teams.away.team.logo,
+                      score: teams.away.score >= 0 ? teams.away.score : null,
+                      winner: checkIfWinnerExistsAndValue(teams.away),
+                    },
+                    teamHome: {
+                      name: teams.home.team.displayName,
+                      record: `${score[teams.home.id].wins}-${score[teams.away.id].wins}`,
+                      logo: teams.home.team.logo,
+                      score: teams.home.score >= 0 ? teams.home.score : null,
+                      winner: checkIfWinnerExistsAndValue(teams.home),
+                    }
+                  }
+                  break;
+                default:
+                  tempGame = {
+                    status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
+                    statusCode,
+                    gameDatetime: game.date,
+                    teamAway: teamBuilder(teams.away),
+                    teamHome: teamBuilder(teams.home)
+                  };
               }
+              
               simplifiedFormat.push(tempGame);
             }
           });
@@ -42,7 +72,7 @@ function useFetchGames(league, url) {
       }
     };
     xhr.send();
-  }, [url])
+  }, [league, url])
   return { data, loading };
 }
 
