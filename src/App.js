@@ -1,20 +1,22 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 
 import { LeaguePanel } from 'containers';
 import { PanelWrapper } from 'components';
-import { MLB, NBA, NCAAF, NFL, NHL} from 'consts';
 
+import { retrieveLeagues } from './store/gamesSlice';
 import './App.css';
 import ESPNLogo from './assets/ESPN_wordmark.svg';
 
 function App() {
+  const leagues = useSelector(retrieveLeagues);
+
   const localTime = new Date().toLocaleDateString('en-us', {
     weekday: 'long',
     day: 'numeric',
     month: 'long'
   });
-
-  const leaguesToRender = [MLB, NBA, NCAAF, NFL, NHL];
 
   return (
     <div className="App">
@@ -40,7 +42,7 @@ function App() {
       </header>
       <body>
         {/* Refresh every 5 minutes */}
-        { leaguesToRender.map(league => {
+        { leagues.map(league => {
             return (
               <PanelWrapper leagueName={league} key={league}>
                 <LeaguePanel league={league} />
@@ -58,5 +60,5 @@ export default App;
 // Create shareable props or interface
 // Write tests, specially for MatchBox
 // Add generic filtering for games order
-// Movable sections
+// Movable sections (use cookies to keep order of leagues)
 // Make all files TSX
