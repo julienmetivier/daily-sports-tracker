@@ -1,3 +1,5 @@
+import { MLB, IN_PROGRESS } from 'consts';
+
 export function checkIfWinnerExistsAndValue(team) {
   if (!team.hasOwnProperty('winner')) {
     return null;
@@ -23,4 +25,61 @@ export function isCurrentGameToday(gameDate) {
   const formattedGameDate = new Date(gameDate);
   const formattedTodayDate = new Date();
   return formattedGameDate.setHours(0,0,0,0) === formattedTodayDate.setHours(0,0,0,0);
+}
+
+export function formatFetchCall(league, response) {
+  const simplifiedFormat = [];
+  if ( response.events.length > 0 ) {
+    response.events.forEach(game => {
+      if (isCurrentGameToday(game.date)) {
+        let tempGame = {};
+        const gameDetails = game.competitions[0];
+        const teams = {
+          [gameDetails.competitors[0].homeAway]: gameDetails.competitors[0],
+          [gameDetails.competitors[1].homeAway]: gameDetails.competitors[1],
+        }
+        const statusCode = game.status.type.name;
+
+        switch(league) {
+          case MLB:
+            const score = {
+              [gameDetails.series.competitors[0].id]: gameDetails.series.competitors[0],
+              [gameDetails.series.competitors[1].id]: gameDetails.series.competitors[1],
+            };
+            tempGame = {
+              status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
+              statusCode,
+              gameDatetime: game.date,
+              teamAway: {
+                name: teams.away.team.displayName,
+                record: `${score[teams.away.id].wins}-${score[teams.home.id].wins}`,
+                logo: teams.away.team.logo,
+                score: teams.away.score >= 0 ? teams.away.score : null,
+                winner: checkIfWinnerExistsAndValue(teams.away),
+              },
+              teamHome: {
+                name: teams.home.team.displayName,
+                record: `${score[teams.home.id].wins}-${score[teams.away.id].wins}`,
+                logo: teams.home.team.logo,
+                score: teams.home.score >= 0 ? teams.home.score : null,
+                winner: checkIfWinnerExistsAndValue(teams.home),
+              }
+            }
+            break;
+          default:
+            tempGame = {
+              status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
+              statusCode,
+              gameDatetime: game.date,
+              teamAway: teamBuilder(teams.away),
+              teamHome: teamBuilder(teams.home)
+            };
+        }
+        
+        simplifiedFormat.push(tempGame);
+      }
+    });
+  }
+
+  return simplifiedFormat;
 }

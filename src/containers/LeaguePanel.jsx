@@ -1,37 +1,24 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 
 import { LoadingPanel, MatchBox, NoGamesLabel } from 'components';
-import { DATA_URLS } from 'consts';
 
-import useFetchGames from 'hooks/useFetchGames';
-
-import { setGames } from '../store/gamesSlice';
+import { retrieveGamesByLeague } from '../store/gamesSlice';
 
 const LeaguePanel = ({ league }) => {
-  const dispatch = useDispatch();
-  const { data, loading } = useFetchGames(league, DATA_URLS[league]);
+  const { initialLoading, games } = useSelector((state) => retrieveGamesByLeague(state, league));
 
-  useEffect(() => {
-    if (data.length !== 0) {
-      dispatch(setGames({ league, games: data }));
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [league, data]); // Dispatch is recommended to be avoided
-
-
-  if (loading) {
+  if (initialLoading) {
     return <LoadingPanel />;
   }
 
-  if (data.length === 0) {
+  if (games.length === 0) {
     return <NoGamesLabel />;
   }
 
   return (
     <Grid container spacing={2}>
-      {data?.map((game, i) =>
+      {games?.map((game, i) =>
         <Grid 
           item 
           xs={12} 
