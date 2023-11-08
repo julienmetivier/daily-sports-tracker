@@ -101,3 +101,4 @@ export default App;
 // Add generic filtering for games order
 // Movable sections (use cookies to keep order of leagues)
 // Make all files TSX
+// Add switch for Live updates
