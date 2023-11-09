@@ -40,8 +40,8 @@ function App() {
 
     fetchLeaguesLoop();
 
-    // Recall fetchLoop every 30 seconds
     const intervalId = setInterval(() => {
+      // Recall fetchLoop every 30 seconds
       fetchLeaguesLoop();
     }, 30000);
 
@@ -49,7 +49,8 @@ function App() {
     return () => {
       clearInterval(intervalId);
     };
-  }, [leagues]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [leagues]); // Not recommended to include dispatch
 
   const localTime = new Date().toLocaleDateString('en-us', {
     weekday: 'long',
@@ -64,7 +65,7 @@ function App() {
           <Typography variant='h3'>Daily Sports Tracker</Typography>
           <Typography variant='h5'>{localTime}</Typography>
           <Box sx={{display: 'inline-flex', justifyContent: 'center'}}>
-            <Typography variant='h6' sx={{mr: '0.5rem'}}>Data brought you by</Typography>
+            <Typography variant='h6' sx={{mr: '0.5rem'}}>Data brought to you by</Typography>
             <a href='https://espn.go.com/' target='_blank' rel='noreferrer'>
               <Box
                 component="img"

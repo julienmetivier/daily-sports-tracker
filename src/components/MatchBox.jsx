@@ -1,7 +1,7 @@
 import { Box, Grid, Typography, capitalize } from '@mui/material';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 
-import { IN_PROGRESS, FINAL, HALFTIME } from 'consts';
+import { IN_PROGRESS, FINAL, HALFTIME, END_PERIOD } from 'consts';
 
 const loserColor = '#424347';
 const winnerColor = 'black';
@@ -51,7 +51,7 @@ const MatchBox = ({
             <ImageNotSupportedIcon sx={{color: loserColor}} />
           }
         </Grid>
-        { [IN_PROGRESS, HALFTIME, FINAL].includes(statusCode) &&
+        { [IN_PROGRESS, HALFTIME, END_PERIOD, FINAL].includes(statusCode) &&
           <Grid item xs={3} md={3}>
             <Typography variant='h5' color={fontColor}>{team.score}</Typography>
           </Grid>
