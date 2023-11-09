@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Typography } from '@mui/material';
+import { Box, FormControlLabel, FormGroup, Switch, Typography } from '@mui/material';
 
 import { LeaguePanel } from 'containers';
 import { PanelWrapper } from 'components';
@@ -14,6 +14,8 @@ import { formatFetchCall } from 'utils';
 function App() {
   const dispatch = useDispatch();
   const leagues = useSelector(retrieveLeagues);
+
+  const [ isContinuousUpdate, setIsContinuousUpdate ] = useState(false);
 
   useEffect(() => {
     const fetchLeagueData = async (league) => {
@@ -42,7 +44,9 @@ function App() {
 
     const intervalId = setInterval(() => {
       // Recall fetchLoop every 30 seconds
-      fetchLeaguesLoop();
+      if ( isContinuousUpdate ) {
+        fetchLeaguesLoop();
+      }
     }, 30000);
 
     // Clear the interval when the component unmounts to prevent memory leaks
@@ -50,7 +54,11 @@ function App() {
       clearInterval(intervalId);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [leagues]); // Not recommended to include dispatch
+  }, [leagues, isContinuousUpdate]); // Not recommended to include dispatch
+
+  const handleSwitchChange = () => {
+    setIsContinuousUpdate(!isContinuousUpdate);
+  };
 
   const localTime = new Date().toLocaleDateString('en-us', {
     weekday: 'long',
@@ -81,7 +89,19 @@ function App() {
         </Box>
       </header>
       <body>
-        {/* Refresh every 5 minutes */}
+        <Box sx={{ m:'1rem', p:'1rem' }}>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={isContinuousUpdate}
+                  onChange={handleSwitchChange}
+                />
+              }
+              label="Toggle updates every 30 seconds"
+            />
+          </FormGroup>
+        </Box>
         { leagues.map(league => {
             return (
               <PanelWrapper leagueName={league} key={league}>
