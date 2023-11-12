@@ -1,9 +1,11 @@
 import { Box, Grid, LinearProgress } from '@mui/material';
 
+import { COLORS } from 'consts';
+
 const LinearProgressRevamp = () => 
   <LinearProgress sx={{ 
     borderRadius: '1rem',
-    backgroundColor: '#646871',
+    backgroundColor: COLORS.ACCENT,
     '& .MuiLinearProgress-bar': {
       backgroundColor: '#4e5157'
     }, 
@@ -19,7 +21,7 @@ const GameLoading = () => {
       border: 1,
       borderRadius: '0.5rem',
       boxShadow: 1,
-      backgroundColor: '#646871', 
+      backgroundColor: COLORS.ACCENT,
       height: '7.5rem',
       }}>
       <Grid container spacing={1}>

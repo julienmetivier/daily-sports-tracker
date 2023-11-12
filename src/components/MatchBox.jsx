@@ -1,7 +1,7 @@
 import { Box, Grid, Typography, capitalize } from '@mui/material';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 
-import { IN_PROGRESS, FINAL, HALFTIME, END_PERIOD } from 'consts';
+import { IN_PROGRESS, FINAL, HALFTIME, END_PERIOD, COLORS } from 'consts';
 
 const loserColor = '#424347';
 const winnerColor = 'black';
@@ -65,10 +65,9 @@ const MatchBox = ({
       mx: '1rem',
       my: '0.5rem',
       p: '0.25rem',
-      border: 1,
       borderRadius: '0.5rem',
-      boxShadow: 1,
-      backgroundColor: '#646871', 
+      boxShadow: 4,
+      backgroundColor: COLORS.HIGHLIGHT,
       height: '7.5rem',
       }}>
       <Grid container spacing={1}>

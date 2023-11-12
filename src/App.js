@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 
 import { ControlHeader, LeaguePanel } from 'containers';
 import { PanelWrapper } from 'components';
-import { DATA_URLS } from 'consts';
+import { DATA_URLS, COLORS } from 'consts';
 
 import { retrieveLeagues, setGames } from './store/gamesSlice';
 import './App.css';
@@ -13,9 +13,8 @@ import { formatFetchCall } from 'utils';
 
 const AppStyle = {
   textAlign: 'center',
-  backgroundColor: '#282c34',
-  width: '100vw',
-  minHeight: '100vh'
+  backgroundColor: COLORS.SECONDARY,
+  width: '100vw'
 };
 
 const HeaderStyle = {

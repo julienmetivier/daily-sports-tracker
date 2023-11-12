@@ -23,5 +23,6 @@ export const COLORS = {
   PRIMARY: '#040D12', // Deep Night
   SECONDARY: '#183D3D', // Teal Shadow
   ACCENT: '#5C8374', // Moss Green
-  HIGHLIGHT: '#93B1A6' // Misty Blue
+  HIGHLIGHT: '#93B1A6', // Misty Blue
+  LIGHT: '#FDFDFB'
 }
