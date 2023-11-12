@@ -11,6 +11,21 @@ import './App.css';
 import ESPNLogo from './assets/ESPN_wordmark.svg';
 import { formatFetchCall } from 'utils';
 
+const AppStyle = {
+  textAlign: 'center',
+  backgroundColor: '#282c34',
+  width: '100vw',
+  minHeight: '100vh'
+};
+
+const HeaderStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  fontSize: 'calc(10px + 2vmin)',
+  color: 'white',
+  p: '1rem'
+};
+
 function App() {
   const dispatch = useDispatch();
   const leagues = useSelector(retrieveLeagues);
@@ -66,27 +81,25 @@ function App() {
   });
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Box sx={{m: '1rem'}}>
-          <Typography variant='h3'>Daily Sports Tracker</Typography>
-          <Typography variant='h5'>{localTime}</Typography>
-          <Box sx={{display: 'inline-flex', justifyContent: 'center'}}>
-            <Typography variant='h6' sx={{mr: '0.5rem'}}>Data brought to you by</Typography>
-            <a href='https://espn.go.com/' target='_blank' rel='noreferrer'>
-              <Box
-                component="img"
-                sx={{
-                  width: 97,
-                  height: 24
-                }}
-                alt='ESPN Logo'
-                src={ESPNLogo}
-              />
-            </a>
-          </Box>
+    <Box sx={AppStyle}>
+      <Box sx={HeaderStyle} component="header">
+        <Typography variant='h3'>Daily Sports Tracker</Typography>
+        <Typography variant='h5'>{localTime}</Typography>
+        <Box sx={{display: 'inline-flex', justifyContent: 'center'}}>
+          <Typography variant='h6' sx={{mr: '0.5rem'}}>Data brought to you by</Typography>
+          <a href='https://espn.go.com/' target='_blank' rel='noreferrer'>
+            <Box
+              component="img"
+              sx={{
+                width: 97,
+                height: 24
+              }}
+              alt='ESPN Logo'
+              src={ESPNLogo}
+            />
+          </a>
         </Box>
-      </header>
+      </Box>
       <body>
         <ControlHeader
           isContinuousUpdate={isContinuousUpdate}
@@ -101,7 +114,7 @@ function App() {
           )
         }
       </body>
-    </div>
+    </Box>
   );
 }
 
