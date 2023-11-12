@@ -18,3 +18,10 @@ export const DATA_URLS = {
   [NFL]:    'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard',
   [NHL]:    'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard'
 };
+
+export const COLORS = {
+  PRIMARY: '#040D12', // Deep Night
+  SECONDARY: '#183D3D', // Teal Shadow
+  ACCENT: '#5C8374', // Moss Green
+  HIGHLIGHT: '#93B1A6' // Misty Blue
+}

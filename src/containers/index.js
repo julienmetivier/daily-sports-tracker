@@ -1,3 +1,4 @@
+import ControlHeader from './ControlHeader';
 import LeaguePanel from './LeaguePanel';
 
-export { LeaguePanel };
+export { ControlHeader, LeaguePanel };

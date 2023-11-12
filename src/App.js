@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, FormControlLabel, FormGroup, Switch, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
-import { LeaguePanel } from 'containers';
+import { ControlHeader, LeaguePanel } from 'containers';
 import { PanelWrapper } from 'components';
 import { DATA_URLS } from 'consts';
 
@@ -26,8 +26,7 @@ function App() {
           const data = formatFetchCall(league, result);
           dispatch(setGames({ league, games: data }));
         } else {
-          // Handle error
-          console.error('Failed to fetch data');
+          console.error(`Failed to fetch data for ${league}`);
         }
       } catch (error) {
         console.error('Error:', error);
@@ -89,19 +88,10 @@ function App() {
         </Box>
       </header>
       <body>
-        <Box sx={{ m:'1rem', p:'1rem' }}>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={isContinuousUpdate}
-                  onChange={handleSwitchChange}
-                />
-              }
-              label="Toggle updates every 30 seconds"
-            />
-          </FormGroup>
-        </Box>
+        <ControlHeader
+          isContinuousUpdate={isContinuousUpdate}
+          onContinuousUpdateChange={handleSwitchChange}
+        />
         { leagues.map(league => {
             return (
               <PanelWrapper leagueName={league} key={league}>
@@ -117,9 +107,13 @@ function App() {
 
 export default App;
 
-// Create shareable props or interface
-// Write tests, specially for MatchBox
+// Change color scheme
 // Add generic filtering for games order
+// Add banner for cookies permissions
 // Movable sections (use cookies to keep order of leagues)
+// Fix retrigger when unchecking continuous updates
+// Write tests, specially for MatchBox
+// Add logic to trigger default live updates based on day and time of day
+// Create shareable props or interface
 // Make all files TSX
-// Add switch for Live updates
+// Add logic to change day for games results
