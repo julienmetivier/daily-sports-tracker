@@ -3,7 +3,7 @@ import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 
 import { IN_PROGRESS, FINAL, HALFTIME, END_PERIOD, COLORS } from 'consts';
 
-const loserColor = '#424347';
+const loserColor = COLORS.FONT.LIGHT_GRAY;
 const winnerColor = 'black';
 const gameFinished = loserColor;
 
@@ -21,10 +21,10 @@ const TeamLogo = ({ logoUrl, teamName, opacity }) => (
 );
 
 const MatchBox = ({
-    status, 
+    status,
     statusCode,
-    gameDatetime, 
-    teamAway, 
+    gameDatetime,
+    teamAway,
     teamHome
   }) => {
   const localGameTime = new Date(gameDatetime).toLocaleTimeString('en-us', {
@@ -39,7 +39,7 @@ const MatchBox = ({
     return (
       <>
         <Grid item xs={6} md={6} sx={{textAlign: "right"}}>
-          <Typography color={fontColor}>{team.name}</Typography>
+          <Typography color={fontColor} noWrap>{team.name}</Typography>
         </Grid>
         <Grid item xs={2} md={2}>
           <Typography color={fontColor}>{team.record}</Typography>

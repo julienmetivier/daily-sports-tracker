@@ -14,7 +14,7 @@ const PanelWrapper = ({leagueName, children}) => {
         backgroundColor: COLORS.ACCENT,
         mx: '1rem',
         mb: '2rem',
-        p: '0.5rem'
+        p: '0.25rem'
       }}>
         {children}
       </Box>

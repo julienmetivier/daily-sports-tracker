@@ -13,8 +13,7 @@ const SwitchLabel = () => {
 const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
   return ( 
     <Box sx={{ 
-      border: 1,
-      borderColor: '#FDFDFB',
+      backgroundColor: '#77889982',
       boxShadow: 2,
       borderRadius: 2,
       mx: '1rem',

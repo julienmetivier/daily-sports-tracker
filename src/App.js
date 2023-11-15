@@ -119,8 +119,8 @@ function App() {
 
 export default App;
 
-// Change color scheme
 // Add generic filtering for games order
+// Add footer (Github link)
 // Add banner for cookies permissions
 // Movable sections (use cookies to keep order of leagues)
 // Fix retrigger when unchecking continuous updates

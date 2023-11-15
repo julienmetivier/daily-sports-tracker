@@ -6,6 +6,7 @@ export const NFL = 'NFL';
 export const NHL = 'NHL';
 
 // Game states
+export const SCHEDULED = 'STATUS_SCHEDULED';
 export const HALFTIME = 'STATUS_HALFTIME';
 export const IN_PROGRESS = 'STATUS_IN_PROGRESS';
 export const FINAL = 'STATUS_FINAL';
@@ -24,5 +25,8 @@ export const COLORS = {
   SECONDARY: '#183D3D', // Teal Shadow
   ACCENT: '#5C8374', // Moss Green
   HIGHLIGHT: '#93B1A6', // Misty Blue
-  LIGHT: '#FDFDFB'
+  LIGHT: '#FDFDFB',
+  FONT: {
+    LIGHT_GRAY: '#424347'
+  }
 }
