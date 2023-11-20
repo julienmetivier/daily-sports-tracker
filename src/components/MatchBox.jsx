@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, capitalize } from '@mui/material';
+import { Box, capitalize, Grid, Typography } from '@mui/material';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 
 import { IN_PROGRESS, FINAL, HALFTIME, END_PERIOD, COLORS } from 'consts';
@@ -6,6 +6,20 @@ import { IN_PROGRESS, FINAL, HALFTIME, END_PERIOD, COLORS } from 'consts';
 const loserColor = COLORS.FONT.LIGHT_GRAY;
 const winnerColor = 'black';
 const gameFinished = loserColor;
+
+const scoreFadeInStyle = {
+  animation: 'fadeIn 1s',
+  '@keyframes fadeIn': {
+    '0%': {
+      opacity: 0,
+      transform: 'translateX(-20%)'
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translateY(0)'
+    }
+  }
+};
 
 const TeamLogo = ({ logoUrl, teamName, opacity }) => (
   <Box
@@ -53,12 +67,12 @@ const MatchBox = ({
         </Grid>
         { [IN_PROGRESS, HALFTIME, END_PERIOD, FINAL].includes(statusCode) &&
           <Grid item xs={3} md={3}>
-            <Typography variant='h5' color={fontColor}>{team.score}</Typography>
+            <Typography variant='h5' sx={scoreFadeInStyle} color={fontColor}>{team.score}</Typography>
           </Grid>
         }
       </>
     );
-  }
+  };
 
   return ( 
     <Box sx={{ 

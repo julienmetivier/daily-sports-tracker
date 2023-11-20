@@ -14,7 +14,8 @@ import { formatFetchCall } from 'utils';
 const AppStyle = {
   textAlign: 'center',
   backgroundColor: COLORS.SECONDARY,
-  width: '100vw'
+  width: '100vw',
+  minHeight: '90vw'
 };
 
 const HeaderStyle = {

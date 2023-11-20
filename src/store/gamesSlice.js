@@ -6,9 +6,14 @@ const initialLeagues = [MLB, NBA, NCAAF, NFL, NHL];
 
 const initialState = {
   leagues: initialLeagues,
-  initialLoadings: Object.assign({}, ...initialLeagues.map((x) => ({[x]: true}))),
-  games: Object.assign({}, ...initialLeagues.map((x) => ({[x]: []}))),
 };
+
+initialLeagues.forEach((league) => {
+  initialState[league] = {
+    initialLoading: true,
+    games: [],
+  };
+});
 
 const gamesSlice = createSlice({
   name: 'games',
@@ -16,8 +21,8 @@ const gamesSlice = createSlice({
   reducers: {
     setGames: (state, action) => {
       const { league, games } = action.payload;
-      state.initialLoadings[league] = false;
-      state.games[league] = games;
+      state[league].initialLoading = false;
+      state[league].games = games;
     },
     setLeaguesOrder: (state, action) => {
       state.leagues = action.payload.leagues;
@@ -28,14 +33,6 @@ const gamesSlice = createSlice({
 export const { setGames, setLeaguesOrder } = gamesSlice.actions;
 
 export const retrieveLeagues = (state) => state.games.leagues;
-export const retrieveGames = (state) => state.games;
-export const retrieveLeague = (state, league) => league;
-// For more context on this function structure: https://redux.js.org/usage/deriving-data-selectors#createselector-behavior
-export const retrieveGamesByLeague = createSelector([retrieveGames, retrieveLeague], (games, league) => {
-  return ({
-    initialLoading: games.initialLoadings[league],
-    games: games.games[league]
-  });
-});
+export const retrieveLeague = (state, league) => state.games[league];
 
 export default gamesSlice.reducer;

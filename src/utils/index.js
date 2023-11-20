@@ -1,4 +1,4 @@
-import { MLB, IN_PROGRESS } from 'consts';
+import { MLB, IN_PROGRESS, END_PERIOD } from 'consts';
 
 export function checkIfWinnerExistsAndValue(team) {
   if (!team.hasOwnProperty('winner')) {
@@ -68,7 +68,7 @@ export function formatFetchCall(league, response) {
             break;
           default:
             tempGame = {
-              status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
+              status: [IN_PROGRESS, END_PERIOD].includes(statusCode) ? game.status.type.shortDetail : game.status.type.description,
               statusCode,
               gameDatetime: game.date,
               teamAway: teamBuilder(teams.away),

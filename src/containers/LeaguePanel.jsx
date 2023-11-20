@@ -3,10 +3,10 @@ import { Grid } from '@mui/material';
 
 import { LoadingPanel, MatchBox, NoGamesLabel } from 'components';
 
-import { retrieveGamesByLeague } from '../store/gamesSlice';
+import { retrieveLeague } from '../store/gamesSlice';
 
 const LeaguePanel = ({ league }) => {
-  const { initialLoading, games } = useSelector((state) => retrieveGamesByLeague(state, league));
+  const { initialLoading, games } = useSelector((state) => retrieveLeague(state, league));
 
   if (initialLoading) {
     return <LoadingPanel />;
