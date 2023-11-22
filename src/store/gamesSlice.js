@@ -1,14 +1,12 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-import { MLB, NBA, NCAAF, NFL, NHL} from 'consts';
-
-const initialLeagues = [MLB, NBA, NCAAF, NFL, NHL];
+import { ALL_LEAGUES } from 'consts';
 
 const initialState = {
-  leagues: initialLeagues,
+  leagues: ALL_LEAGUES,
 };
 
-initialLeagues.forEach((league) => {
+ALL_LEAGUES.forEach((league) => {
   initialState[league] = {
     initialLoading: true,
     games: [],

@@ -5,6 +5,9 @@ export const NCAAF = 'NCAAF';
 export const NFL = 'NFL';
 export const NHL = 'NHL';
 
+// Array of existing leagues
+export const ALL_LEAGUES = [MLB, NBA, NCAAF, NFL, NHL];
+
 // Game states
 export const SCHEDULED = 'STATUS_SCHEDULED';
 export const HALFTIME = 'STATUS_HALFTIME';
