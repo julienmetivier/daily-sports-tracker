@@ -125,7 +125,6 @@ export default App;
 // Add banner for cookies permissions
 // Movable sections (use cookies to keep order of leagues)
 // Fix retrigger when unchecking continuous updates
-// Write tests, specially for MatchBox
 // Add logic to trigger default live updates based on day and time of day
 // Create shareable props or interface
 // Make all files TSX
