@@ -3,19 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 
 import { ControlHeader, LeaguePanel } from 'containers';
-import { PanelWrapper } from 'components';
+import { Footer, PanelWrapper } from 'components';
 import { DATA_URLS, COLORS } from 'consts';
+import { formatFetchCall } from 'utils';
 
 import { retrieveLeagues, setGames } from './store/gamesSlice';
 import './App.css';
 import ESPNLogo from './assets/ESPN_wordmark.svg';
-import { formatFetchCall } from 'utils';
 
 const AppStyle = {
   textAlign: 'center',
   backgroundColor: COLORS.SECONDARY,
   width: '100vw',
-  minHeight: '90vw'
 };
 
 const HeaderStyle = {
@@ -114,6 +113,7 @@ function App() {
           )
         }
       </body>
+      <Footer />
     </Box>
   );
 }
