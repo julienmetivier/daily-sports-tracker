@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/daily-sports-tracker/static/css/main.5727d391.css",
-    "main.js": "/daily-sports-tracker/static/js/main.f0784695.js",
+    "main.css": "/daily-sports-tracker/static/css/main.374a13ff.css",
+    "main.js": "/daily-sports-tracker/static/js/main.f1476cf2.js",
     "static/js/787.afc5d136.chunk.js": "/daily-sports-tracker/static/js/787.afc5d136.chunk.js",
     "static/media/ESPN_wordmark.svg": "/daily-sports-tracker/static/media/ESPN_wordmark.2169edf4ed43d358d0e85b4a050ed9d3.svg",
     "index.html": "/daily-sports-tracker/index.html",
-    "main.5727d391.css.map": "/daily-sports-tracker/static/css/main.5727d391.css.map",
-    "main.f0784695.js.map": "/daily-sports-tracker/static/js/main.f0784695.js.map",
+    "main.374a13ff.css.map": "/daily-sports-tracker/static/css/main.374a13ff.css.map",
+    "main.f1476cf2.js.map": "/daily-sports-tracker/static/js/main.f1476cf2.js.map",
     "787.afc5d136.chunk.js.map": "/daily-sports-tracker/static/js/787.afc5d136.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5727d391.css",
-    "static/js/main.f0784695.js"
+    "static/css/main.374a13ff.css",
+    "static/js/main.f1476cf2.js"
   ]
 }
