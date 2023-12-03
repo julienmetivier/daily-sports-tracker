@@ -1,11 +1,19 @@
 import { Box, capitalize, Grid, Typography } from '@mui/material';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 
-import { IN_PROGRESS, FINAL, HALFTIME, END_PERIOD, COLORS } from 'consts';
+import { IN_PROGRESS, FINAL, HALFTIME, END_PERIOD, DELAYED, COLORS } from 'consts';
 
 const loserColor = COLORS.FONT.LIGHT_GRAY;
 const winnerColor = 'black';
 const gameFinished = loserColor;
+
+const dynamicFontVariant = { 
+  typography: { 
+    md: 'body1',
+    sm: 'body1',
+    xs: 'body2'
+  }
+};
 
 const scoreFadeInStyle = {
   animation: 'fadeIn 1s',
@@ -52,21 +60,21 @@ const MatchBox = ({
     const logoOpacity = loserAndFinished ? 0.6 : 1;
     return (
       <>
-        <Grid item xs={6} md={6} sx={{textAlign: "right"}}>
-          <Typography color={fontColor} noWrap>{team.name}</Typography>
+        <Grid item xs={6} sm={6} md={6} sx={{textAlign: "right"}}>
+          <Typography sx={dynamicFontVariant} color={fontColor} noWrap>{team.name}</Typography>
         </Grid>
-        <Grid item xs={2} md={2}>
-          <Typography color={fontColor}>{team.record}</Typography>
+        <Grid item xs={3} sm={2} md={2}>
+          <Typography sx={dynamicFontVariant} color={fontColor}>{team.record}</Typography>
         </Grid>
-        <Grid item xs={1} md={1}>
+        <Grid item xs={1} sm={1} md={1}>
           {team.logo !== null ?
             <TeamLogo logoUrl={team.logo} teamName={team.name} opacity={logoOpacity}/>
             :
             <ImageNotSupportedIcon sx={{color: loserColor}} />
           }
         </Grid>
-        { [IN_PROGRESS, HALFTIME, END_PERIOD, FINAL].includes(statusCode) &&
-          <Grid item xs={3} md={3}>
+        { [IN_PROGRESS, HALFTIME, END_PERIOD, FINAL, DELAYED].includes(statusCode) &&
+          <Grid item xs={2} sm={3} md={3}>
             <Typography variant='h5' sx={scoreFadeInStyle} color={fontColor}>{team.score}</Typography>
           </Grid>
         }

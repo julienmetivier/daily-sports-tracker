@@ -14,6 +14,7 @@ export const HALFTIME = 'STATUS_HALFTIME';
 export const IN_PROGRESS = 'STATUS_IN_PROGRESS';
 export const FINAL = 'STATUS_FINAL';
 export const END_PERIOD = 'STATUS_END_PERIOD';
+export const DELAYED = 'STATUS_DELAYED';
 
 export const DATA_URLS = {
   [MLB]:    'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard',
