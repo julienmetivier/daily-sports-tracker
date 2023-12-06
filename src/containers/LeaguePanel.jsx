@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 
-import { LoadingPanel, MatchBox, NoGamesLabel } from 'components';
+import { LoadingPanel, MatchBoxLayered, NoGamesLabel } from 'components';
 
 import { retrieveLeague } from '../store/gamesSlice';
 
@@ -17,7 +17,7 @@ const LeaguePanel = ({ league }) => {
   }
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={{ md: 1, lg: 2 }}>
       {games?.map((game, i) =>
         <Grid 
           item 
@@ -27,7 +27,7 @@ const LeaguePanel = ({ league }) => {
           lg={4} 
           key={`${league}_${i}`}
         >
-          <MatchBox {...game}/>
+          <MatchBoxLayered {...game}/>
         </Grid>
       )}
     </Grid>
