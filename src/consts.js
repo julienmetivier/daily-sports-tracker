@@ -34,3 +34,8 @@ export const COLORS = {
     LIGHT_GRAY: '#424347'
   }
 }
+
+export const MATCH_DISPLAY = {
+  LINEAR: 'linear',
+  MULTI: 'multi'
+}

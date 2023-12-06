@@ -1,12 +1,14 @@
 import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 
-import { LoadingPanel, MatchBoxLayered, NoGamesLabel } from 'components';
+import { LoadingPanel, MatchBox, MatchBoxLayered, NoGamesLabel } from 'components';
 
-import { retrieveLeague } from '../store/gamesSlice';
+import { retrieveLeague, retrieveDisplayFormat } from '../store/gamesSlice';
+import { MATCH_DISPLAY } from 'consts';
 
 const LeaguePanel = ({ league }) => {
   const { initialLoading, games } = useSelector((state) => retrieveLeague(state, league));
+  const displayFormat = useSelector((state) => retrieveDisplayFormat(state));
 
   if (initialLoading) {
     return <LoadingPanel />;
@@ -14,6 +16,17 @@ const LeaguePanel = ({ league }) => {
 
   if (games.length === 0) {
     return <NoGamesLabel />;
+  }
+
+  function displayMatch(game) {
+    switch (displayFormat) {
+      case MATCH_DISPLAY.LINEAR:
+        return <MatchBox {...game} />
+      case MATCH_DISPLAY.MULTI:
+        return <MatchBoxLayered {...game} />
+      default:
+        return <MatchBoxLayered {...game} />
+    };
   }
 
   return (
@@ -27,7 +40,7 @@ const LeaguePanel = ({ league }) => {
           lg={4} 
           key={`${league}_${i}`}
         >
-          <MatchBoxLayered {...game}/>
+          {displayMatch(game)}
         </Grid>
       )}
     </Grid>

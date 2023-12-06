@@ -1,3 +1,4 @@
+import { useSelector, useDispatch } from 'react-redux';
 import { 
   Box,
   Divider,
@@ -13,8 +14,10 @@ import {
 import AlignHorizontalCenterIcon from '@mui/icons-material/AlignHorizontalCenter';
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 
-import { COLORS } from 'consts';
+import { COLORS, MATCH_DISPLAY } from 'consts';
 import { ToggleLeagues } from 'containers';
+
+import { retrieveDisplayFormat, setDisplayFormat } from '../../store/gamesSlice';
 
 const SwitchLabel = () => {
   const tooltipText = 'Get refreshed scores every 30 seconds';
@@ -26,26 +29,17 @@ const SwitchLabel = () => {
   );
 };
 
-const ToggleMatchDisplay = () => {
-  return (
-    <ToggleButtonGroup
-      // value={alignment}
-      size='small'
-      exclusive
-      onChange={(event, matchDisplay) => console.log(matchDisplay)}
-      aria-label='match display'
-    >
-      <ToggleButton value='linear' aria-label='linear display'>
-        <AlignHorizontalLeftIcon />
-      </ToggleButton>
-      <ToggleButton value='multi' aria-label='multi-level display'>
-        <AlignHorizontalCenterIcon />
-      </ToggleButton>
-    </ToggleButtonGroup>
-  );
-};
-
 const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
+  const dispatch = useDispatch();
+  const displayFormat = useSelector((state) => retrieveDisplayFormat(state));
+
+  const handleDisplayFormatChange = (selectedDisplayFormat) => {
+    if (selectedDisplayFormat === null) return;
+    if (selectedDisplayFormat === displayFormat) return;
+
+    dispatch(setDisplayFormat({displayFormat: selectedDisplayFormat}));
+  }
+
   return ( 
     <Box sx={{ 
       backgroundColor: '#77889982',
@@ -56,13 +50,7 @@ const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
       p: '1rem'
     }}>
       <Grid container>
-        <Grid 
-            item 
-            xs={12}
-            sm={4}
-            md={4}
-            lg={2}
-        >
+        <Grid item xs={12} sm={4} md={4} lg={2}>
           <FormGroup>
             <FormControlLabel
               control={
@@ -76,24 +64,25 @@ const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
           </FormGroup>
         </Grid>
         <Divider orientation="vertical" flexItem color={COLORS.SECONDARY} />
-        <Grid 
-            item 
-            xs={12}
-            sm={6}
-            md={6}
-            lg={4}
-        >
+        <Grid item xs={12} sm={6} md={6} lg={4}>
           <ToggleLeagues />
         </Grid>
         <Divider orientation="vertical" flexItem color={COLORS.SECONDARY} />
-        <Grid 
-            item 
-            xs={12}
-            sm={4}
-            md={4}
-            lg={3}
-        >
-          <ToggleMatchDisplay />
+        <Grid item xs={12} sm={4} md={4} lg={3}>
+          <ToggleButtonGroup
+            value={displayFormat}
+            size='small'
+            exclusive
+            onChange={(event, displayChangeValue) => handleDisplayFormatChange(displayChangeValue)}
+            aria-label='match display'
+          >
+            <ToggleButton value={MATCH_DISPLAY.LINEAR} aria-label='linear display'>
+              <AlignHorizontalLeftIcon />
+            </ToggleButton>
+            <ToggleButton value={MATCH_DISPLAY.MULTI} aria-label='multi-level display'>
+              <AlignHorizontalCenterIcon />
+            </ToggleButton>
+          </ToggleButtonGroup>
         </Grid>
       </Grid>
     </Box>
