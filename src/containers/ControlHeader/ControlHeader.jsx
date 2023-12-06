@@ -1,4 +1,3 @@
-import { useSelector, useDispatch } from 'react-redux';
 import { 
   Box,
   Divider,
@@ -7,17 +6,11 @@ import {
   Grid,
   Switch,
   Tooltip,
-  ToggleButton,
-  ToggleButtonGroup,
   Typography
 } from '@mui/material';
-import AlignHorizontalCenterIcon from '@mui/icons-material/AlignHorizontalCenter';
-import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 
-import { COLORS, MATCH_DISPLAY } from 'consts';
-import { ToggleLeagues } from 'containers';
-
-import { retrieveDisplayFormat, setDisplayFormat } from '../../store/gamesSlice';
+import { COLORS } from 'consts';
+import { ToggleLeagues, ToggleDisplayFormat } from 'containers';
 
 const SwitchLabel = () => {
   const tooltipText = 'Get refreshed scores every 30 seconds';
@@ -30,16 +23,6 @@ const SwitchLabel = () => {
 };
 
 const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
-  const dispatch = useDispatch();
-  const displayFormat = useSelector((state) => retrieveDisplayFormat(state));
-
-  const handleDisplayFormatChange = (selectedDisplayFormat) => {
-    if (selectedDisplayFormat === null) return;
-    if (selectedDisplayFormat === displayFormat) return;
-
-    dispatch(setDisplayFormat({displayFormat: selectedDisplayFormat}));
-  }
-
   return ( 
     <Box sx={{ 
       backgroundColor: '#77889982',
@@ -69,20 +52,7 @@ const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
         </Grid>
         <Divider orientation="vertical" flexItem color={COLORS.SECONDARY} />
         <Grid item xs={12} sm={4} md={4} lg={3}>
-          <ToggleButtonGroup
-            value={displayFormat}
-            size='small'
-            exclusive
-            onChange={(event, displayChangeValue) => handleDisplayFormatChange(displayChangeValue)}
-            aria-label='match display'
-          >
-            <ToggleButton value={MATCH_DISPLAY.LINEAR} aria-label='linear display'>
-              <AlignHorizontalLeftIcon />
-            </ToggleButton>
-            <ToggleButton value={MATCH_DISPLAY.MULTI} aria-label='multi-level display'>
-              <AlignHorizontalCenterIcon />
-            </ToggleButton>
-          </ToggleButtonGroup>
+          <ToggleDisplayFormat />
         </Grid>
       </Grid>
     </Box>
