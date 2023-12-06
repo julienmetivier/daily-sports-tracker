@@ -82,19 +82,10 @@ const MatchBoxLayered = ({
       height: '7.5rem',
       }}>
       <Grid container>
-        <Grid item xs={12} md={12}>
-          <Grid container justify="flex-end" alignItems="center">
-              <Grid item xs={7} md={7}>
-                <Typography variant='h6' color={statusCode === FINAL && gameFinished}>{capitalize(status)}</Typography>
-              </Grid>
-              <Grid item xs={5} md={5}>
-                <Typography color={statusCode === FINAL ? gameFinished : 'white'}>{`(${localGameTime})`}</Typography>
-              </Grid>
-          </Grid>
+        <Grid item xs={12} md={12} justify="flex-end" alignItems="center">
+          <Typography variant='body2' color={statusCode === FINAL ? gameFinished : 'white'}>{`(${localGameTime})`}</Typography>
         </Grid>
-        <Grid 
-          container
-        >
+        <Grid container item>
           <Grid item xs={6} md={6}>
             <TeamBlock team={teamAway} side='left' />
           </Grid>
@@ -102,6 +93,9 @@ const MatchBoxLayered = ({
           <Grid item xs={6} md={6}>
             <TeamBlock team={teamHome} side='right' />
           </Grid>
+        </Grid>
+        <Grid item xs={12} md={12} justify="flex-end" alignItems="center">
+          <Typography color={statusCode === FINAL && gameFinished}>{capitalize(status)}</Typography>
         </Grid>
       </Grid>
     </Box> 
