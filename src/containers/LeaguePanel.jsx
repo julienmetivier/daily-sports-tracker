@@ -2,9 +2,9 @@ import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 
 import { LoadingPanel, MatchBox, MatchBoxLayered, NoGamesLabel } from 'components';
+import { MATCH_DISPLAY } from 'consts';
 
 import { retrieveLeague, retrieveDisplayFormat } from '../store/gamesSlice';
-import { MATCH_DISPLAY } from 'consts';
 
 const LeaguePanel = ({ league }) => {
   const { initialLoading, games } = useSelector((state) => retrieveLeague(state, league));

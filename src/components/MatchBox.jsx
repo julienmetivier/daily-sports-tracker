@@ -7,7 +7,7 @@ import { getLocalGameTime } from 'utils';
 import { 
   loserColor,
   winnerColor,
-  gameFinished,
+  gameFinishedColor,
   MatchBoxScoreFadeInStyle
 } from 'styling';
 
@@ -70,10 +70,10 @@ const MatchBox = ({
         <Grid item xs={12} md={12}>
           <Grid container justify="flex-end" alignItems="center">
               <Grid item xs={7} md={7}>
-                <Typography variant='h6' color={statusCode === FINAL && gameFinished}>{capitalize(status)}</Typography>
+                <Typography variant='h6' color={statusCode === FINAL && gameFinishedColor}>{capitalize(status)}</Typography>
               </Grid>
               <Grid item xs={5} md={5}>
-                <Typography color={statusCode === FINAL ? gameFinished : 'white'}>{`(${localGameTime})`}</Typography>
+                <Typography color={statusCode === FINAL ? gameFinishedColor : 'white'}>{`(${localGameTime})`}</Typography>
               </Grid>
           </Grid>
         </Grid>
