@@ -27,6 +27,13 @@ export function isCurrentGameToday(gameDate) {
   return formattedGameDate.setHours(0,0,0,0) === formattedTodayDate.setHours(0,0,0,0);
 }
 
+export function getLocalGameTime(gameDatetime) {
+  return new Date(gameDatetime).toLocaleTimeString('en-us', {
+    hour: 'numeric', 
+    minute: 'numeric'
+  });
+}
+
 export function formatFetchCall(league, response) {
   const simplifiedFormat = [];
   if ( response.events.length > 0 ) {

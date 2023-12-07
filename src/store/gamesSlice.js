@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { ALL_LEAGUES } from 'consts';
+import { ALL_LEAGUES, MATCH_DISPLAY } from 'consts';
 
 const initialState = {
   leagues: ALL_LEAGUES,
+  displayFormat: MATCH_DISPLAY.LINEAR
 };
 
 ALL_LEAGUES.forEach((league) => {
@@ -25,12 +26,16 @@ const gamesSlice = createSlice({
     setLeaguesOrder: (state, action) => {
       state.leagues = action.payload.leagues;
     },
+    setDisplayFormat: (state, action) => {
+      state.displayFormat = action.payload.displayFormat;
+    },
   }
 });
 
-export const { setGames, setLeaguesOrder } = gamesSlice.actions;
+export const { setGames, setLeaguesOrder, setDisplayFormat } = gamesSlice.actions;
 
 export const retrieveLeagues = (state) => state.games.leagues;
 export const retrieveLeague = (state, league) => state.games[league];
+export const retrieveDisplayFormat = (state) => state.games.displayFormat;
 
 export default gamesSlice.reducer;

@@ -6,15 +6,11 @@ import {
   Grid,
   Switch,
   Tooltip,
-  ToggleButton,
-  ToggleButtonGroup,
   Typography
 } from '@mui/material';
-import AlignHorizontalCenterIcon from '@mui/icons-material/AlignHorizontalCenter';
-import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 
 import { COLORS } from 'consts';
-import { ToggleLeagues } from 'containers';
+import { ToggleLeagues, ToggleDisplayFormat } from 'containers';
 
 const SwitchLabel = () => {
   const tooltipText = 'Get refreshed scores every 30 seconds';
@@ -23,25 +19,6 @@ const SwitchLabel = () => {
     <Tooltip placement='top' title={tooltipText}>
       <Typography color={'white'}>Continuous updates</Typography>
     </Tooltip>
-  );
-};
-
-const ToggleMatchDisplay = () => {
-  return (
-    <ToggleButtonGroup
-      // value={alignment}
-      size='small'
-      exclusive
-      onChange={(event, matchDisplay) => console.log(matchDisplay)}
-      aria-label='match display'
-    >
-      <ToggleButton value='linear' aria-label='linear display'>
-        <AlignHorizontalLeftIcon />
-      </ToggleButton>
-      <ToggleButton value='multi' aria-label='multi-level display'>
-        <AlignHorizontalCenterIcon />
-      </ToggleButton>
-    </ToggleButtonGroup>
   );
 };
 
@@ -56,13 +33,7 @@ const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
       p: '1rem'
     }}>
       <Grid container>
-        <Grid 
-            item 
-            xs={12}
-            sm={4}
-            md={4}
-            lg={2}
-        >
+        <Grid item xs={12} sm={4} md={4} lg={2}>
           <FormGroup>
             <FormControlLabel
               control={
@@ -76,24 +47,12 @@ const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
           </FormGroup>
         </Grid>
         <Divider orientation="vertical" flexItem color={COLORS.SECONDARY} />
-        <Grid 
-            item 
-            xs={12}
-            sm={6}
-            md={6}
-            lg={4}
-        >
+        <Grid item xs={12} sm={6} md={6} lg={4}>
           <ToggleLeagues />
         </Grid>
         <Divider orientation="vertical" flexItem color={COLORS.SECONDARY} />
-        <Grid 
-            item 
-            xs={12}
-            sm={4}
-            md={4}
-            lg={3}
-        >
-          <ToggleMatchDisplay />
+        <Grid item xs={12} sm={4} md={4} lg={3}>
+          <ToggleDisplayFormat />
         </Grid>
       </Grid>
     </Box>

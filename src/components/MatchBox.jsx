@@ -1,11 +1,15 @@
 import { Box, capitalize, Grid, Typography } from '@mui/material';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 
+import { TeamLogo } from 'components';
 import { IN_PROGRESS, FINAL, HALFTIME, END_PERIOD, DELAYED, COLORS } from 'consts';
-
-const loserColor = COLORS.FONT.LIGHT_GRAY;
-const winnerColor = 'black';
-const gameFinished = loserColor;
+import { getLocalGameTime } from 'utils';
+import { 
+  loserColor,
+  winnerColor,
+  gameFinishedColor,
+  MatchBoxScoreFadeInStyle
+} from 'styling';
 
 const dynamicFontVariant = { 
   typography: { 
@@ -15,44 +19,14 @@ const dynamicFontVariant = {
   }
 };
 
-const scoreFadeInStyle = {
-  animation: 'fadeIn 1s',
-  '@keyframes fadeIn': {
-    '0%': {
-      opacity: 0,
-      transform: 'translateX(-20%)'
-    },
-    '100%': {
-      opacity: 1,
-      transform: 'translateY(0)'
-    }
-  }
-};
-
-const TeamLogo = ({ logoUrl, teamName, opacity }) => (
-  <Box
-    component="img"
-    sx={{
-      height: 24,
-      width: 24,
-      opacity
-    }}
-    alt={teamName}
-    src={logoUrl}
-  />
-);
-
 const MatchBox = ({
-    status,
-    statusCode,
-    gameDatetime,
-    teamAway,
-    teamHome
-  }) => {
-  const localGameTime = new Date(gameDatetime).toLocaleTimeString('en-us', {
-    hour: 'numeric', 
-    minute: 'numeric'
-  });
+  status,
+  statusCode,
+  gameDatetime,
+  teamAway,
+  teamHome
+}) => {
+  const localGameTime = getLocalGameTime(gameDatetime);
 
   const TeamLine = ({team}) => {
     const loserAndFinished = team.winner !== null && team.winner === false ? true : false;
@@ -75,7 +49,7 @@ const MatchBox = ({
         </Grid>
         { [IN_PROGRESS, HALFTIME, END_PERIOD, FINAL, DELAYED].includes(statusCode) &&
           <Grid item xs={2} sm={3} md={3}>
-            <Typography variant='h5' sx={scoreFadeInStyle} color={fontColor}>{team.score}</Typography>
+            <Typography variant='h5' sx={MatchBoxScoreFadeInStyle} color={fontColor}>{team.score}</Typography>
           </Grid>
         }
       </>
@@ -96,10 +70,10 @@ const MatchBox = ({
         <Grid item xs={12} md={12}>
           <Grid container justify="flex-end" alignItems="center">
               <Grid item xs={7} md={7}>
-                <Typography variant='h6' color={statusCode === FINAL && gameFinished}>{capitalize(status)}</Typography>
+                <Typography variant='h6' color={statusCode === FINAL && gameFinishedColor}>{capitalize(status)}</Typography>
               </Grid>
               <Grid item xs={5} md={5}>
-                <Typography color={statusCode === FINAL ? gameFinished : 'white'}>{`(${localGameTime})`}</Typography>
+                <Typography color={statusCode === FINAL ? gameFinishedColor : 'white'}>{`(${localGameTime})`}</Typography>
               </Grid>
           </Grid>
         </Grid>
