@@ -22,6 +22,19 @@ const SwitchLabel = () => {
   );
 };
 
+const ControlSectionWrapper = ({children}) => {
+  return (
+    <Grid
+      item
+      xs={12}
+      sm='auto'
+      px={'0.5rem'}
+    >
+      {children}
+    </Grid>
+  );
+}
+
 const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
   return ( 
     <Box sx={{ 
@@ -32,10 +45,17 @@ const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
       mb: '2rem',
       p: '1rem'
     }}>
-      <Grid container>
-        <Grid item xs={12} sm={4} md={4} lg={2}>
-          <FormGroup>
+      <Grid
+        container
+        rowSpacing={1}
+        direction='row'
+        justifyContent='center'
+        alignItems='center'
+      >
+        <ControlSectionWrapper>
+          <FormGroup sx={{alignItems: 'center'}}>
             <FormControlLabel
+              sx={{mx: 'auto'}}
               control={
                 <Switch
                   checked={isContinuousUpdate}
@@ -45,15 +65,15 @@ const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
               label={<SwitchLabel />}
             />
           </FormGroup>
-        </Grid>
-        <Divider orientation="vertical" flexItem color={COLORS.SECONDARY} />
-        <Grid item xs={12} sm={6} md={6} lg={4}>
+        </ControlSectionWrapper>
+        <Divider orientation='vertical' flexItem color={COLORS.SECONDARY} />
+        <ControlSectionWrapper>
           <ToggleLeagues />
-        </Grid>
-        <Divider orientation="vertical" flexItem color={COLORS.SECONDARY} />
-        <Grid item xs={12} sm={4} md={4} lg={3}>
+        </ControlSectionWrapper>
+        <Divider orientation='vertical' flexItem color={COLORS.SECONDARY} />
+        <ControlSectionWrapper>
           <ToggleDisplayFormat />
-        </Grid>
+        </ControlSectionWrapper>
       </Grid>
     </Box>
   );
