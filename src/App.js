@@ -8,8 +8,9 @@ import { DATA_URLS, COLORS } from 'consts';
 import { formatFetchCall } from 'utils';
 
 import { retrieveLeagues, setGames } from './store/gamesSlice';
-import './App.css';
+import useLoadLeaguesFromCookie from './hooks/useLoadLeaguesFromCookie';
 import ESPNLogo from './assets/ESPN_wordmark.svg';
+import './App.css';
 
 const AppStyle = {
   textAlign: 'center',
@@ -28,6 +29,7 @@ const HeaderStyle = {
 function App() {
   const dispatch = useDispatch();
   const leagues = useSelector(retrieveLeagues);
+  useLoadLeaguesFromCookie();
 
   const [ isContinuousUpdate, setIsContinuousUpdate ] = useState(false);
 

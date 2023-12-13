@@ -1,3 +1,6 @@
+// App specific
+export const APP_COOKIE_LEAGUES = 'sports_tracker_leagues_order';
+
 // Leagues
 export const MLB = 'MLB';
 export const NBA = 'NBA';
