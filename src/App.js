@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 
-import { ControlHeader, LeaguePanel } from 'containers';
+import { ControlHeader, CookiesConsentFooter, LeaguePanel } from 'containers';
 import { Footer, PanelWrapper } from 'components';
 import { DATA_URLS, COLORS } from 'consts';
 import { formatFetchCall } from 'utils';
@@ -114,6 +114,7 @@ function App() {
         }
       </body>
       <Footer />
+      <CookiesConsentFooter />
     </Box>
   );
 }

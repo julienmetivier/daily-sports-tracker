@@ -29,6 +29,7 @@ export const COLORS = {
   SECONDARY: '#183D3D', // Teal Shadow
   ACCENT: '#5C8374', // Moss Green
   HIGHLIGHT: '#93B1A6', // Misty Blue
+  CONTROL: '#4A646C', // Light Blue Grey
   LIGHT: '#FDFDFB',
   FONT: {
     LIGHT_GRAY: '#424347'
