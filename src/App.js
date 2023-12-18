@@ -123,11 +123,13 @@ function App() {
 
 export default App;
 
-// Add generic filtering for games order
-// Add banner for cookies permissions
-// Movable sections (use cookies to keep order of leagues)
-// Fix retrigger when unchecking continuous updates
+// TODO:
+// Add generic filtering for games order (e.g. best records first, game finished last, etc.)
+// Add logic to change day for games results
+// Change leagues toggle to pills format
+
+// NICE TO HAVE:
 // Add logic to trigger default live updates based on day and time of day
 // Create shareable props or interface
 // Make all files TSX
-// Add logic to change day for games results
+// Fix retrigger when unchecking continuous updates
