@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 
 import { COLORS } from 'consts';
-import { ToggleLeagues, ToggleDisplayFormat } from 'containers';
+import { ToggleLeagues } from 'containers';
 
 const SwitchLabel = () => {
   const tooltipText = 'Get refreshed scores every 30 seconds';
@@ -69,10 +69,6 @@ const ControlHeader = ({ isContinuousUpdate, onContinuousUpdateChange }) => {
         <Divider orientation='vertical' flexItem color={COLORS.SECONDARY} />
         <ControlSectionWrapper>
           <ToggleLeagues />
-        </ControlSectionWrapper>
-        <Divider orientation='vertical' flexItem color={COLORS.SECONDARY} />
-        <ControlSectionWrapper>
-          <ToggleDisplayFormat />
         </ControlSectionWrapper>
       </Grid>
     </Box>
