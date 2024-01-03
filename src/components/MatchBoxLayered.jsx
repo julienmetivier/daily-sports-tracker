@@ -11,6 +11,8 @@ import {
   MatchBoxScoreFadeInStyle
 } from 'styling';
 
+const accentColor = '#F0EAD6';
+
 const MatchBoxLayered = ({
   status,
   statusCode,
@@ -47,10 +49,10 @@ const MatchBoxLayered = ({
           item
           justifyContent="center"
           alignItems="center">
-          <Grid item xs={9} sm='auto' md={9} sx={{px: '0.25rem'}} zeroMinWidth>
+          <Grid item xs={8} sm='auto' md={9} sx={{px: '0.25rem'}} zeroMinWidth>
             <Typography sx={{fontSize: { xs: '0.80rem', sm: '1rem' }, fontWeight: 500}} color={fontColor} noWrap gutterBottom>{team.name}</Typography>
           </Grid>
-          <Grid item xs={3} sm={3} md={3}>
+          <Grid item xs={4} sm={3} md={3}>
             <Typography sx={{fontSize: '0.75rem'}} color={fontColor} gutterBottom>{team.record}</Typography>
           </Grid>
         </Grid>
@@ -83,7 +85,7 @@ const MatchBoxLayered = ({
       }}>
       <Grid container>
         <Grid item xs={12} md={12} justify="flex-end" alignItems="center">
-          <Typography variant='body2' color={statusCode === FINAL ? gameFinishedColor : 'white'}>{`(${localGameTime})`}</Typography>
+          <Typography variant='body2' color={statusCode === FINAL ? gameFinishedColor : accentColor}>{`(${localGameTime})`}</Typography>
         </Grid>
         <Grid container item>
           <Grid item xs={6} md={6}>
@@ -95,7 +97,7 @@ const MatchBoxLayered = ({
           </Grid>
         </Grid>
         <Grid item xs={12} md={12} justify="flex-end" alignItems="center">
-          <Typography color={statusCode === FINAL && gameFinishedColor}>{capitalize(status)}</Typography>
+          <Typography color={statusCode === FINAL ? gameFinishedColor : accentColor}>{capitalize(status)}</Typography>
         </Grid>
       </Grid>
     </Box> 

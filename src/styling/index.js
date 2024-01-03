@@ -1,7 +1,7 @@
 import { COLORS } from 'consts';
 
 export const loserColor = COLORS.FONT.LIGHT_GRAY;
-export const winnerColor = 'black';
+export const winnerColor = 'white';
 export const gameFinishedColor = loserColor;
 
 export const MatchBoxScoreFadeInStyle = {
