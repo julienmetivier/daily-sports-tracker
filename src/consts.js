@@ -35,7 +35,7 @@ export const COLORS = {
   CONTROL: '#666666', // Gray
   LIGHT: '#FDFDFB',
   FONT: {
-    LIGHT_GRAY: '#424347'
+    LIGHT_GRAY: '#A2A2A2'
   }
 }
 
