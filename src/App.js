@@ -126,7 +126,6 @@ export default App;
 // TODO:
 // Add generic filtering for games order (e.g. best records first, game finished last, etc.)
 // Add logic to change day for games results
-// Change leagues toggle to pills format
 
 // NICE TO HAVE:
 // Add logic to trigger default live updates based on day and time of day

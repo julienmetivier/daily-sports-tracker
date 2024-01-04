@@ -28,14 +28,14 @@ export const DATA_URLS = {
 };
 
 export const COLORS = {
-  PRIMARY: '#040D12', // Deep Night
-  SECONDARY: '#183D3D', // Teal Shadow
-  ACCENT: '#5C8374', // Moss Green
-  HIGHLIGHT: '#93B1A6', // Misty Blue
-  CONTROL: '#4A646C', // Light Blue Grey
+  PRIMARY: '#000000', // Black
+  SECONDARY: '#1a1a1a', // Very dark gray (almost black)
+  ACCENT: '#333333', // Very dark gray
+  HIGHLIGHT: '#4d4d4d', // Dark gray
+  CONTROL: '#666666', // Gray
   LIGHT: '#FDFDFB',
   FONT: {
-    LIGHT_GRAY: '#424347'
+    LIGHT_GRAY: '#A2A2A2'
   }
 }
 
