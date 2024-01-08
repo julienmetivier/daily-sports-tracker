@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 
-import { ControlHeader, CookiesConsentFooter, LeaguePanel } from 'containers';
+import { ControlHeader, CookiesConsentFooter, DateSelectionPanel, LeaguePanel } from 'containers';
 import { Footer, PanelWrapper } from 'components';
-import { DATA_URLS, COLORS } from 'consts';
-import { formatFetchCall } from 'utils';
+import { COLORS } from 'consts';
+import { buildUrl, formatFetchCall } from 'utils';
 
 import { retrieveLeagues, setGames } from './store/gamesSlice';
 import useLoadLeaguesFromCookie from './hooks/useLoadLeaguesFromCookie';
@@ -32,14 +32,16 @@ function App() {
   useLoadLeaguesFromCookie();
 
   const [ isContinuousUpdate, setIsContinuousUpdate ] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
     const fetchLeagueData = async (league) => {
       try {
-        const response = await fetch(DATA_URLS[league]);
+        const url = buildUrl(league, currentDate);
+        const response = await fetch(url);
         if (response.ok) {
           const result = await response.json();
-          const data = formatFetchCall(league, result);
+          const data = formatFetchCall(league, result, currentDate);
           dispatch(setGames({ league, games: data }));
         } else {
           console.error(`Failed to fetch data for ${league}`);
@@ -69,7 +71,7 @@ function App() {
       clearInterval(intervalId);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [leagues, isContinuousUpdate]); // Not recommended to include dispatch
+  }, [currentDate, leagues, isContinuousUpdate]); // Not recommended to include dispatch
 
   const handleSwitchChange = () => {
     setIsContinuousUpdate(!isContinuousUpdate);
@@ -106,6 +108,7 @@ function App() {
           isContinuousUpdate={isContinuousUpdate}
           onContinuousUpdateChange={handleSwitchChange}
         />
+        <DateSelectionPanel currentDate={currentDate} setCurrentDate={setCurrentDate} />
         { leagues.map(league => {
             return (
               <PanelWrapper leagueName={league} key={league}>
