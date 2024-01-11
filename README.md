@@ -58,3 +58,10 @@ bun start
 ```
 
 N.B. You can use npm for installation and start process, I just had fun trying out bun and a few of its features.
+
+## Features
+
+### Game Sorting
+- Games that are planned & ongoing will be prioritized to the top of list; Finished games will be at the very bottom
+- Matchups with higher records (both team's wins combined) will be prioritized in every time window (all game starting at the same hour)
+- Time windows are respected - the goal of this app is to find the best games to watch at a certain time
