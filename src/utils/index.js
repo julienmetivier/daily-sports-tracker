@@ -1,4 +1,4 @@
-import { DATA_URLS, MLB, IN_PROGRESS, END_PERIOD } from 'consts';
+import { DATA_URLS, MLB, IN_PROGRESS, END_PERIOD, FINAL } from 'consts';
 
 export function buildUrl(league, currentDate) {
   const today = new Date();
@@ -23,9 +23,23 @@ export function teamBuilder(team) {
   // Rule for NCAA (and potentially more)
   const isRanked = team.curatedRank?.current && team.curatedRank?.current !== 99;
 
+  let record = 'N/A';
+  if (team.records) {
+    const recordParts = team.records[0].summary.split('-').map(Number);
+    const [wins, losses] = recordParts;
+    let tiesOrOvertimes = 0;
+    if (recordParts.length > 2) {
+      tiesOrOvertimes = recordParts[2];
+    }
+    record = { wins, losses };
+    if (tiesOrOvertimes > 0) {
+      record.tiesOrOvertimes = tiesOrOvertimes;
+    }
+  }
+
   return {
     name: isRanked ? `${team.curatedRank.current} - ${team.team.displayName}` : team.team.displayName,
-    record: team.records ? team.records[0].summary : 'N/A',
+    record,
     logo: team.team.logo || null,
     score: team.score >= 0 ? team.score : null,
     winner: checkIfWinnerExistsAndValue(team),
@@ -59,6 +73,7 @@ export function formatFetchCall(league, response, currentDate = null) {
         const statusCode = game.status.type.name;
 
         switch(league) {
+          // Might need to revisit this because it may be specific to MLB playoffs
           case MLB:
             const score = {
               [gameDetails.series.competitors[0].id]: gameDetails.series.competitors[0],
@@ -98,6 +113,27 @@ export function formatFetchCall(league, response, currentDate = null) {
       }
     });
   }
+
+  simplifiedFormat.sort((gameA, gameB) => {
+    // If one game is FINAL and the other is not, the FINAL game goes to the bottom
+  if (gameA.status === FINAL && gameB.status !== FINAL) return 1;
+  if (gameA.status !== FINAL && gameB.status === FINAL) return -1;
+
+    // Compare the game times
+    const timeA = new Date(gameA.gameDatetime);
+    const timeB = new Date(gameB.gameDatetime);
+    if (timeA < timeB) return -1;
+    if (timeA > timeB) return 1;
+
+    // If the game times are equal, compare the records
+    const recordA = gameA.teamAway.record.wins + gameA.teamHome.record.wins;
+    const recordB = gameB.teamAway.record.wins + gameB.teamHome.record.wins;
+    if (recordA > recordB) return -1;
+    if (recordA < recordB) return 1;
+
+    // If the game statuses are equal, the games are equal
+    return 0;
+  });
 
   return simplifiedFormat;
 }
