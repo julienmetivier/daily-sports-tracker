@@ -1,4 +1,15 @@
-import { MLB, IN_PROGRESS, END_PERIOD } from 'consts';
+import { DATA_URLS, MLB, IN_PROGRESS, END_PERIOD } from 'consts';
+
+export function buildUrl(league, currentDate) {
+  const today = new Date();
+  let url = DATA_URLS[league];
+  if ( currentDate.setHours(0,0,0,0) !== today.setHours(0,0,0,0) ) {
+    const dateStr = currentDate.toISOString().slice(0,10).replace(/-/g,"");
+    url += `?dates=${dateStr}`;
+  }
+
+  return url;
+}
 
 export function checkIfWinnerExistsAndValue(team) {
   if (!team.hasOwnProperty('winner')) {
@@ -21,9 +32,9 @@ export function teamBuilder(team) {
   };
 }
 
-export function isCurrentGameToday(gameDate) {
+export function isCurrentGameToday(gameDate, currentDate) {
   const formattedGameDate = new Date(gameDate);
-  const formattedTodayDate = new Date();
+  const formattedTodayDate = currentDate || new Date();
   return formattedGameDate.setHours(0,0,0,0) === formattedTodayDate.setHours(0,0,0,0);
 }
 
@@ -34,11 +45,11 @@ export function getLocalGameTime(gameDatetime) {
   });
 }
 
-export function formatFetchCall(league, response) {
+export function formatFetchCall(league, response, currentDate = null) {
   const simplifiedFormat = [];
   if ( response.events.length > 0 ) {
     response.events.forEach(game => {
-      if (isCurrentGameToday(game.date)) {
+      if ( isCurrentGameToday(game.date, currentDate)) {
         let tempGame = {};
         const gameDetails = game.competitions[0];
         const teams = {
