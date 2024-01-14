@@ -10,7 +10,6 @@ import {
   gameFinishedColor,
   MatchBoxScoreFadeInStyle
 } from 'styling';
-import { LteMobiledata } from '@mui/icons-material';
 
 const accentColor = '#F0EAD6';
 

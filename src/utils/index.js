@@ -116,8 +116,8 @@ export function formatFetchCall(league, response, currentDate = null) {
 
   simplifiedFormat.sort((gameA, gameB) => {
     // If one game is FINAL and the other is not, the FINAL game goes to the bottom
-  if (gameA.status === FINAL && gameB.status !== FINAL) return 1;
-  if (gameA.status !== FINAL && gameB.status === FINAL) return -1;
+    if (gameA.statusCode === FINAL && gameB.statusCode !== FINAL) return 1;
+    if (gameA.statusCode !== FINAL && gameB.statusCode === FINAL) return -1;
 
     // Compare the game times
     const timeA = new Date(gameA.gameDatetime);
