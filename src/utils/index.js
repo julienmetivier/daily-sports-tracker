@@ -27,12 +27,12 @@ export function teamBuilder(team) {
   if (team.records) {
     const recordParts = team.records[0].summary.split('-').map(Number);
     const [wins, losses] = recordParts;
-    let tiesOrOvertimes = 0;
+    let tiesOrOvertimes = null;
     if (recordParts.length > 2) {
       tiesOrOvertimes = recordParts[2];
     }
     record = { wins, losses };
-    if (tiesOrOvertimes > 0) {
+    if (tiesOrOvertimes !== null) {
       record.tiesOrOvertimes = tiesOrOvertimes;
     }
   }
