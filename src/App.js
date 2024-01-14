@@ -125,13 +125,3 @@ function App() {
 }
 
 export default App;
-
-// TODO:
-// Add generic filtering for games order (e.g. best records first, game finished last, etc.)
-// Add logic to change day for games results
-
-// NICE TO HAVE:
-// Add logic to trigger default live updates based on day and time of day
-// Create shareable props or interface
-// Make all files TSX
-// Fix retrigger when unchecking continuous updates
