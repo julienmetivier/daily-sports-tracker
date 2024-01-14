@@ -29,6 +29,14 @@ const MatchBoxLayered = ({
     const sideIsRight = side === 'right';
     const otherSide = sideIsRight ? 'left' : 'right';
 
+    let record =  team.record;
+    if (typeof team.record !== 'string') { // Checks if not "N/A"
+      record = `${team.record.wins}-${team.record.losses}`;
+      if (team.record.tiesOrOvertimes !== undefined) {
+        record = `${record}-${team.record.tiesOrOvertimes}`;
+      }
+    }
+
     const TeamScore = () => (
       [IN_PROGRESS, HALFTIME, END_PERIOD, FINAL, DELAYED].includes(statusCode) &&
         <Grid item xs={4} sm={4} md={4} sx={{textAlign: otherSide, p: '0.5rem'}}>
@@ -53,7 +61,7 @@ const MatchBoxLayered = ({
             <Typography sx={{fontSize: { xs: '0.80rem', sm: '1rem' }, fontWeight: 500}} color={fontColor} noWrap gutterBottom>{team.name}</Typography>
           </Grid>
           <Grid item xs={4} sm={3} md={3}>
-            <Typography sx={{fontSize: '0.75rem'}} color={fontColor} gutterBottom>{team.record}</Typography>
+            <Typography sx={{fontSize: '0.75rem'}} color={fontColor} gutterBottom>{record}</Typography>
           </Grid>
         </Grid>
         { sideIsRight && <TeamScore /> }
