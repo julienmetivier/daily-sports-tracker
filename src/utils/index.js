@@ -1,4 +1,4 @@
-import { DATA_URLS, MLB, IN_PROGRESS, END_PERIOD, FINAL } from 'consts';
+import { DATA_URLS, IN_PROGRESS, END_PERIOD, FINAL } from 'consts';
 
 export function buildUrl(league, currentDate) {
   const today = new Date();
@@ -63,7 +63,7 @@ export function formatFetchCall(league, response, currentDate = null) {
   const simplifiedFormat = [];
   if ( response.events.length > 0 ) {
     response.events.forEach(game => {
-      if ( isCurrentGameToday(game.date, currentDate)) {
+      if (isCurrentGameToday(game.date, currentDate)) {
         let tempGame = {};
         const gameDetails = game.competitions[0];
         const teams = {
@@ -74,31 +74,31 @@ export function formatFetchCall(league, response, currentDate = null) {
 
         switch(league) {
           // Might need to revisit this because it may be specific to MLB playoffs
-          case MLB:
-            const score = {
-              [gameDetails.series.competitors[0].id]: gameDetails.series.competitors[0],
-              [gameDetails.series.competitors[1].id]: gameDetails.series.competitors[1],
-            };
-            tempGame = {
-              status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
-              statusCode,
-              gameDatetime: game.date,
-              teamAway: {
-                name: teams.away.team.displayName,
-                record: `${score[teams.away.id].wins}-${score[teams.home.id].wins}`,
-                logo: teams.away.team.logo,
-                score: teams.away.score >= 0 ? teams.away.score : null,
-                winner: checkIfWinnerExistsAndValue(teams.away),
-              },
-              teamHome: {
-                name: teams.home.team.displayName,
-                record: `${score[teams.home.id].wins}-${score[teams.away.id].wins}`,
-                logo: teams.home.team.logo,
-                score: teams.home.score >= 0 ? teams.home.score : null,
-                winner: checkIfWinnerExistsAndValue(teams.home),
-              }
-            }
-            break;
+          // case MLB:
+          //   const score = {
+          //     [gameDetails.series.competitors[0].id]: gameDetails.series.competitors[0],
+          //     [gameDetails.series.competitors[1].id]: gameDetails.series.competitors[1],
+          //   };
+          //   tempGame = {
+          //     status: statusCode === IN_PROGRESS ? game.status.type.shortDetail : game.status.type.description,
+          //     statusCode,
+          //     gameDatetime: game.date,
+          //     teamAway: {
+          //       name: teams.away.team.displayName,
+          //       record: `${score[teams.away.id].wins}-${score[teams.home.id].wins}`,
+          //       logo: teams.away.team.logo,
+          //       score: teams.away.score >= 0 ? teams.away.score : null,
+          //       winner: checkIfWinnerExistsAndValue(teams.away),
+          //     },
+          //     teamHome: {
+          //       name: teams.home.team.displayName,
+          //       record: `${score[teams.home.id].wins}-${score[teams.away.id].wins}`,
+          //       logo: teams.home.team.logo,
+          //       score: teams.home.score >= 0 ? teams.home.score : null,
+          //       winner: checkIfWinnerExistsAndValue(teams.home),
+          //     }
+          //   }
+          //   break;
           default:
             tempGame = {
               status: [IN_PROGRESS, END_PERIOD].includes(statusCode) ? game.status.type.shortDetail : game.status.type.description,
