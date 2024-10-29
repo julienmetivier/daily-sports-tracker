@@ -1,12 +1,11 @@
-import { useState } from 'react';
 import {
-  Button,
   Card,
   CardActionArea,
   CardContent,
-  Collapse,
   Divider,
   Grid,
+  ToggleButton,
+  ToggleButtonGroup,
   Typography,
   useMediaQuery,
   useTheme
@@ -15,15 +14,15 @@ import {
 import { PanelWrapper } from 'components';
 import { COLORS } from 'consts';
 
-const formatDate = (date) => {
+const formatDate = (date, isMobile = false) => {
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  return daysOfWeek[date.getDay()];
+  const abbreviatedDaysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  return isMobile ? abbreviatedDaysOfWeek[date.getDay()] : daysOfWeek[date.getDay()];
 };
 
 const DateSelectionPanel = ({ currentDate, setCurrentDate }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const [isOpen, setIsOpen] = useState(!isSmallScreen);
 
   const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
   const dates = [
@@ -36,12 +35,47 @@ const DateSelectionPanel = ({ currentDate, setCurrentDate }) => {
 
   return (
     <PanelWrapper>
-      {isSmallScreen && (
-        <Button onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? 'Hide Dates' : 'Show Dates'}
-        </Button>
-      )}
-      <Collapse in={isOpen}>
+      {isSmallScreen ? (
+        <ToggleButtonGroup
+          value={currentDate.getTime()}
+          exclusive
+          onChange={(event, value) => {
+            if (value !== null) setCurrentDate(new Date(value));
+          }}
+          aria-label="day selection"
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          {dates.map((day) => (
+            <ToggleButton
+              key={day}
+              value={day.getTime()}
+              aria-label={formatDate(day)}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '4px',
+                width: '70px',
+                height: '40px',
+                border: '1px solid',
+                borderRadius: '10px',
+                fontSize: '0.875rem',
+                backgroundColor: currentDate.getTime() === day.getTime() ? '#4d4d4d' : 'transparent',
+              }}
+            >
+              <Typography variant="body2" color='#F0EAD6'>{formatDate(day, true)}</Typography>
+              <div style={{ fontSize: '0.65rem', color: 'gray' }}>
+                {day.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+              </div>
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
+      ) : (
         <Grid container justifyContent='space-between' spacing={1}>
           {dates.map((date, index) => (
             <Grid item xs={12} sm={2} key={index}>
@@ -50,30 +84,22 @@ const DateSelectionPanel = ({ currentDate, setCurrentDate }) => {
               >
                 <CardActionArea onClick={() => setCurrentDate(date)}>
                   <CardContent sx={{ padding: 0.5 }}>
-                    { isSmallScreen ? (
-                      <>
-                        <Typography variant='body1'>
-                          {formatDate(date)} ({date.toLocaleDateString(undefined, { month: 'long', day: 'numeric' })})
-                        </Typography>
-                      </>
-                    ) : (
-                      <>
-                        <Typography variant='h6'>
-                          {formatDate(date)}
-                        </Typography>
-                        <Divider variant="middle" />
-                        <Typography variant="body2">
-                          {date.toLocaleDateString(undefined, { month: 'long', day: 'numeric' })}
-                        </Typography>
-                      </>
-                    )}
+                    <>
+                      <Typography variant='h6'>
+                        {formatDate(date)}
+                      </Typography>
+                      <Divider variant="middle" />
+                      <Typography variant="body2">
+                        {date.toLocaleDateString(undefined, { month: 'long', day: 'numeric' })}
+                      </Typography>
+                    </>
                   </CardContent>
                 </CardActionArea>
               </Card>
             </Grid>
           ))}
         </Grid>
-      </Collapse>
+      )}
     </PanelWrapper>
   );
 }
